@@ -8,7 +8,9 @@ const db = require('../models')
 
 //GET /users/new -- serves a form to create a new user
 router.get('/new', (req, res) => {
-    res.render('users/new.ejs')
+    res.render('users/new.ejs', {
+        user: res.locals.user
+    })
 })
 
 // POST /users -- creates a new user from the form @ /users/new
@@ -42,7 +44,8 @@ router.post('/', async (req, res) => {
 // GET / users/login -- render a login form that POsts to /users/login
 router.get('/login', (req, res) => {
     res.render('users/login.ejs', {
-        message: req.query.message ? req.query.message : null
+        message: req.query.message ? req.query.message : null,
+        user: res.locals.user
     })
 })
 
@@ -83,6 +86,18 @@ router.get('/logout', (req, res) => {
     //log the user out by removing the cookie
     res.clearCookie('userId')
     res.redirect('/')
+})
+
+// GET / users/profile --showthe user their profile page
+router.get('/profile', (req, res) => {
+    //if the user is not logged in  -- they are allowed here
+    if(!res.locals.user) {
+        res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+    } else {
+        res.render('users/profile.ejs', {
+            user: res.locals.user
+        })
+    }
 })
 
 //export
