@@ -4,7 +4,7 @@
 * Create an organizer for all your to-dos. Set dates, reminders, and login to your profile to update progress. 
 
 # API
-* Google Calendar
+* Unsplash.com
 
 # ERD
 ![ERD](ERD.png)
@@ -14,9 +14,12 @@
 
 # User stories
 * As a user, I want to sign in to my account. 
+* I want to sign out of my account.
 * I want to view my profile which has a list of all of my goals and to-dos.
+* I want reminders when the dates for my goals are approaching. 
 * I want to edit and delete my goals and to-dos.
-* I want to add dates and reminders in my calendar
+* I want to customize my goals and to dos with photos. 
+
 
 | HTTP METHOD (_Verb_) | URL (_Nouns_)     | CRUD    | Response                             | Notes                                                                                                                    |
 | -------------------- | ----------------- | ------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -33,14 +36,18 @@
 
 # MVP
 * Create two new models that store data about goals and tasks using postgres
-* Insert the calendar API into the tasks and goals pages
+* Insert Unsplash API to give users pictures to insert into project tasks and goals
 * Create full CRUD routes on goals using express
+* Create a reminder system when dates are approaching. 
 * Add in bootstrap styling
 
 # Stretch
+* Create full CRUD routes on tasks using express
 * Add a blogging component and make this into an event/travel planning blog
+* Have a pre-defined travel organizer available
+* Have a pre-defined event organizer available
 * Add in another model for blogging
 * Add a photo uploading API 
 * Add commenting abilities
-* Create a better profile experience
+* Create a better profile experience with photo uploading and public information. 
 
