@@ -28,7 +28,7 @@
 | GET                | `/users/login`          | READ |  Page requires email and password authetication from database      | redirect to where to find data (GET `/users/:user_id`) or just the new user data |
 | PUT/PATCH            | `/users/:userid` | UPDATE  | No data, or updated user `{ user }`  |  redirect to where to find data (GET `/users/:userid`) or just the new user data |
 | DELETE               | `/users/:userid` | DESTROY | No data                              | can send  redirect to homepage (GET `/`)                               |
-| GET             | `/users/:user_id/goals` | READ | Page displaying goals      |                               |
+| GET             | `/users/:user_id/goals` | READ | Page displaying goals for other users     |                               |
 | GET              | `/users/:user_id/goals/:goalsid` | READ| Page of tasks associated with goals  |                              |
 | POST           | `/users/:user_id/goals` | CREATE| Add a new goal with tasks  |    redirect to `/users/:user_id/goals/:goalsid`      
 | PUT        | `/users/:user_id/goals/:goalsid` | Update| update a goal with tasks  |    redirect to `/users/:user_id/goals/:goalsid` and show updated information
@@ -38,10 +38,10 @@
 * Create two new models that store data about goals and tasks using postgres
 * Insert Unsplash API to give users pictures to insert into project tasks and goals
 * Create full CRUD routes on goals using express
-* Create a reminder system when dates are approaching. 
 * Add in bootstrap styling
 
 # Stretch
+* Create a reminder system when dates are approaching. 
 * Create full CRUD routes on tasks using express
 * Add a blogging component and make this into an event/travel planning blog
 * Have a pre-defined travel organizer available
