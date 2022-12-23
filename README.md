@@ -3,6 +3,16 @@
 # Description
 * Create an organizer for all your to-dos. Set dates, reminders, and login to your profile to update progress. 
 
+- Goals for this project are to:
+    - [ ]  Affirm learning of sequelize
+    - [ ]  Affirm learning of express
+    - [ ]  Create a bootstrap website
+    - [ ]  Learn more about APIs
+    - [ ]  Learn about user login creation and security
+    - [ ]  Learn about encrypting login information
+    - [ ]  Learn about retrieving encrypted information
+    - [ ]  Implement an existing API in my website using axios
+
 # API
 * Unsplash.com
 

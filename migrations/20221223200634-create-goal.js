@@ -18,6 +18,9 @@ module.exports = {
       img_url: {
         type: Sequelize.STRING
       },
+      due_date: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

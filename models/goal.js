@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   goal.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    img_url: DataTypes.STRING
+    img_url: DataTypes.STRING,
+    due_date: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'goal',
