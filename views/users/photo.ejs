@@ -1,0 +1,11 @@
+
+<form method="POST" action="photo">
+    <input type="text" name="photoSearch">
+    <button type="submit">Add to Favorites</button>
+</form>
+
+<% photo.forEach(photo => { %>
+    <img src="<%= photo.urls.regular %>">
+    <h1></h1>
+<% }) %>
+ 

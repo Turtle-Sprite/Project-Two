@@ -3,9 +3,11 @@ const express = require('express')
 const router = express.Router()
 const crypto = require('crypto-js')
 const bcrypt = require('bcrypt')
+const axios = require('axios')
 
 const db = require('../models')
 
+const API_KEY = process.env.APIKEY
 //routes
 
 //GET /users/new -- serves a form to create a new user
@@ -23,9 +25,8 @@ router.post('/', async (req, res) => {
             where: {
                 email: req.body.email
             }
-            //TODO: don't add plaintext passwords to the db 
-            //this will add the passwod to database if user isn't found
         })
+        //this will add the passwod to database if user isn't found
         if (!created) {
            console.log('user exists')
            res.redirect('/users/login?message=Please log in to continue.')     
@@ -44,16 +45,6 @@ router.post('/', async (req, res) => {
             //redirect to the user's profile
             res.redirect('/users/profile')
         }
-        //defunct now that I have hashing and encryted userId and passwords
-        //base this on info in req.body (form)
-        //TODO: redirect to login page if the user is found
-        //log the user in(store the user's id as a cookie in the browser)
-        //this will store a key value pair as a cookie
-        //must encrypt
-        // res.cookie('userId', newUser.id)
-        // //redirect to the home page(for now)
-        // res.redirect('/')
-
 
     } catch (err) {
         console.log(err)
@@ -127,6 +118,34 @@ router.get('/profile', (req, res) => {
         })
     }
 })
+
+
+router.get('/photo', (req, res) => {
+    try {
+        res.render('users/photo.ejs')
+    } catch (err) {
+        console.log(err)
+        // res.status(500).send('server error')
+    }
+})
+
+//post /goals/photos shows a photo on the page
+router.post('/photo', async (req, res) => {
+    try {
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
+        // res.send('hello')
+        res.render('users/photo.ejs', {
+            photo: response.data.results
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
+})
+
 
 //export
 module.exports = router
