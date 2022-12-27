@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
                 email: req.body.email
             }
         })
-        //this will add the passwod to database if user isn't found
+        //this will add the password to database if user isn't found
         if (!created) {
            console.log('user exists')
            res.redirect('/users/login?message=Please log in to continue.')     
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-// GET / users/login -- render a login form that POsts to /users/login
+// GET / users/login -- render a login form that Posts to /users/login
 router.get('/login', (req, res) => {
     res.render('users/login.ejs', {
         message: req.query.message ? req.query.message : null,
@@ -69,13 +69,13 @@ router.post('/login', async (req, res) => {
                 email: req.body.email
             }
         })
-        //boilerplate messageif login fails
+        //boilerplate message if login fails
         const badCredentialMessage = 'username or password incorrect'
         if (!user) {
             //if user isn't found in the db
             res.redirect('/users/login?message=' + badCredentialMessage)
 
-            //if this returns false, rdirect to user login
+            //if this returns false, redirect to user login
         } else if(!bcrypt.compareSync(req.body.password, user.password)) {
             //if the user's supplied password is incorrect 
             res.redirect('/users/login?message=' + badCredentialMessage)

@@ -70,7 +70,7 @@ app.get('/', (req,res) => {
 })
 
 app.use("/users", require('./controllers/users'))
-// app.use("/goals", require('./controllers/goals'))
+app.use("/goals", require('./controllers/goals'))
 
 //listen on port
 app.listen(PORT, () => {
