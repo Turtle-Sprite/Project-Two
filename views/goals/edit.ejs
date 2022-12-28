@@ -1,0 +1,18 @@
+
+<!-- This page is linked by the href in the a tag surrounding the update button on the goal show page -->
+<h1>Update <%= goal.name %></h1>
+<form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
+    <fieldset>
+        <legend>Update Goal</legend>
+    <label for="name">Goal name</label>
+    <input type="text" id="name" name="name" value="<%= goal.name %>">
+
+    <label for="description">Describe Event</label>
+    <textarea type="text" id="description" name="description"><%= goal.description %></textarea>
+
+    <label for="dueDate">Due Date</label>
+    <input type="date" id="dueDate" name="dueDate" value="<%= goal.due_date %>">
+    <label for="update">Update Goal</label>
+    <button type="submit" id="update" name="_method">Update Goal</button>
+    </fieldset>
+    </form>

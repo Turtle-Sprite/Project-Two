@@ -31,12 +31,12 @@ router.post('/', async (req,res) =>{
         })
         // console.log(newGoal)
         //if goal exists, redirect to goals page
-        // if (!createdGoal) {
-        //     res.redirect('users/profile/?message=That goal already exists.')
-        // } else {
-            //if we create a new goal, redirect to that page here
+        if (!createdGoal) {
+            res.redirect('users/profile/?message=That goal already exists.')
+        } else {
+            // if we create a new goal, redirect to that page here
             res.redirect(`goals/${newGoal.id}`)
-        // }
+        }
     } catch (err) {
         console.log('this is a goal post error', err)
     }
@@ -46,18 +46,26 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
+        
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
         })
-        console.log(goal)
-        if(res.locals.user) {
-            res.render('goals/show.ejs', {
-                user: user,
-                goal: goal
-            })
+        
+        //make sure there is a goal with that id
+        if(goal.id) {
+             //make sure they're logged in
+            if(user) {
+                res.render('goals/show.ejs', {
+                    user: user,
+                    goal: goal
+                })
+            } else {
+                res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+            }
         } else {
-            res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+            //if goalId is invalid, redirect to the profile page
+            res.redirect('/users/login?message=That goal doesn\'t exist in our database. Please choose an existing goal. ')
         }
 
     }catch (err) {
@@ -65,7 +73,56 @@ router.get('/:goalId', async (req,res) => {
     }
 })
 
-//  PUT // /:goalId updates a goal's progress - redirects to /:goalsId
+//GET // //:goalId/edit shows the edit form - redirect to /:goalId in PUT route
+router.get('/:goalId/edit', async (req,res) =>{
+    let user = await res.locals.user.email
+    let goal = await db.goal.findOne({
+        where: { id: req.params.goalId }
+    })
+    res.render('goals/edit.ejs', {
+        user: user,
+        goal: goal
+    })
+})
+
+//  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
+router.put('/:goalId', async (req,res) => {
+    try{
+        let user = await res.locals.user.email
+        let goal = await db.goal.findOne({
+            where: { id: req.params.goalId }
+        })
+        //make sure the goal exists
+        console.log('goal id', goal.id)
+        if(goal.id) {
+            //make sure they're logged in
+            console.log('user info', user)
+           if(user) {
+                let goalUpdate = await db.goal.update({
+                    name: req.body.name,
+                    description: req.body.description,
+                    img_url: req.body.img_url,
+                    due_date: req.body.dueDate
+                },
+                {
+                where: {id: req.params.goalId }
+            })
+               res.render(`goals/show.ejs`, {
+                   user: user,
+                   goal: goal
+               })
+           } else {
+               res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+           }
+       } else {
+           //if goalId is invalid, redirect to the profile page
+           res.redirect('/users/login?message=That goal doesn\'t exist in our database. Please choose an existing goal. ')
+       }
+
+    } catch (err){
+        console.log(err)
+    }
+})
 
 // DELETE // /:goalId deletes a goals from the database
 router.delete('/:goalId', async (req, res) => {
