@@ -20,7 +20,7 @@ router.get('/new', (req,res) =>{
 router.post('/', async (req,res) =>{
     try {
         //find or create a goal
-        const [newGoal, createdGoal] = await db.project.findOrCreate({
+        const [newGoal, createdGoal] = await db.goal.findOrCreate({
             where: {
                 name: req.body.name.toLowerCase()
             }, 
@@ -29,12 +29,13 @@ router.post('/', async (req,res) =>{
             due_date: req.body.dueDate
             }
         })
+        // console.log(newGoal)
         //if goal exists, redirect to goals page
         // if (!createdGoal) {
         //     res.redirect('users/profile/?message=That goal already exists.')
         // } else {
             //if we create a new goal, redirect to that page here
-            res.redirect(`/:goal${db.project.id}`)
+            res.redirect(`goals/${newGoal.id}`)
         // }
     } catch (err) {
         console.log('this is a goal post error', err)
@@ -46,7 +47,7 @@ router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
         let user = await res.locals.user.email
-        let goal = await db.project.findOne({
+        let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
         })
         console.log(goal)
@@ -69,7 +70,7 @@ router.get('/:goalId', async (req,res) => {
 // DELETE // /:goalId deletes a goals from the database
 router.delete('/:goalId', async (req, res) => {
     // let goal = await db.project.findByPk(req.params.goalId)
-    await db.project.destroy({where: {id: req.params.goalId}})
+    await db.goal.destroy({where: {id: req.params.goalId}})
     res.redirect('/users/profile')
 })
 

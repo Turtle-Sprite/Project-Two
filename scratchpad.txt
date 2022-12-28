@@ -3,7 +3,10 @@ Creating a User
 sequelize model:create --name user --attributes email:string,password:string,fName:string,lName:string,bio:string
 
 Creating a project
-sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date
+sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date,userId:integer
+
+Creating a goal
+sequelize model:create --name goal --attributes name:string,description:string,img_url:string,due_date:date,userId:integer
 
 Creating a task
 sequelize model:create --name task --attributes name:string,description:string,due_date:date
