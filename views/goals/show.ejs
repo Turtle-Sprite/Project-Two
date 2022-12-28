@@ -2,3 +2,8 @@
 <p>You are signed in as <%= user %></p>
 <p>Project Description: <%= goal.description %></p>
 <p>Due Date: <%= goal.due_date %></p>
+
+<form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
+<label for="delete">Delete Goal</label>
+<button type="submit" id="delete" name="_method">Delete</button>
+</form>

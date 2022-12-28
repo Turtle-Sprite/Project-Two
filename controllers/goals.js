@@ -37,17 +37,17 @@ router.post('/', async (req,res) =>{
             res.redirect(`/:goal${db.project.id}`)
         // }
     } catch (err) {
-        console.log('this is a post error', err)
+        console.log('this is a goal post error', err)
     }
 })
 
-// GET // /:goalsId shows a specific page for a goal by the db ID and URL number
-router.get('/:goalsId', async (req,res) => {
+// GET // /:goalId shows a specific page for a goal by the db ID and URL number
+router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
         let user = await res.locals.user.email
         let goal = await db.project.findOne({
-            where: { id: req.params.goalsId }
+            where: { id: req.params.goalId }
         })
         console.log(goal)
         if(res.locals.user) {
@@ -64,7 +64,14 @@ router.get('/:goalsId', async (req,res) => {
     }
 })
 
-//  PUT // 
+//  PUT // /:goalId updates a goal's progress - redirects to /:goalsId
+
+// DELETE // /:goalId deletes a goals from the database
+router.delete('/:goalId', async (req, res) => {
+    // let goal = await db.project.findByPk(req.params.goalId)
+    await db.project.destroy({where: {id: req.params.goalId}})
+    res.redirect('/users/profile')
+})
 
 
 //export

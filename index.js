@@ -4,12 +4,16 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const db = require('./models')
 const crypto = require('crypto-js')
+//allows deletion and updating of html forms
+const methodOverride = require('method-override')
 
 //app config
 const app = express()
 //will use the devevlopment port OR port 8010 if its not available
 const PORT = process.env.PORT || 8010
 app.set('view engine', 'ejs')
+//send method override to all downstream express routes
+app.use(methodOverride('_method'))
 
 //middleware - requests bodies from html forms
 app.use(express.urlencoded({ extended: false}))
