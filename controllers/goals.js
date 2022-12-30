@@ -13,7 +13,7 @@ const API_KEY = process.env.APIKEY
 
 //GET // / -- form with new goal - Check
 router.get('/new', (req,res) =>{
-    res.render('goals/new.ejs')
+res.render('goals/new.ejs')
 })
 
 // POST // / --create the new goal -- redirect to profile
@@ -32,7 +32,8 @@ router.post('/', async (req,res) =>{
         // console.log(newGoal)
         //if goal exists, redirect to goals page
         if (!createdGoal) {
-            res.redirect('users/profile/?message=That goal already exists.')
+            
+            res.redirect('goals/new')
         } else {
             // if we create a new goal, redirect to that page here
             res.redirect(`goals/${newGoal.id}`)
@@ -58,7 +59,8 @@ router.get('/:goalId', async (req,res) => {
             if(user) {
                 res.render('goals/show.ejs', {
                     user: user,
-                    goal: goal
+                    goal: goal,
+                    message: req.query.message ? req.query.message : null
                 })
             } else {
                 res.redirect('/users/login?message=You must authenticate before you can view this resource!')
@@ -79,10 +81,14 @@ router.get('/:goalId/edit', async (req,res) =>{
     let goal = await db.goal.findOne({
         where: { id: req.params.goalId }
     })
-    res.render('goals/edit.ejs', {
-        user: user,
-        goal: goal
-    })
+    if (!user) {
+        res.redirect('/users/login?message=Please log in to continue.')
+    } else {
+        res.render('goals/edit.ejs', {
+            user: user,
+            goal: goal,
+        })
+    }
 })
 
 //  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
@@ -93,10 +99,10 @@ router.put('/:goalId', async (req,res) => {
             where: { id: req.params.goalId }
         })
         //make sure the goal exists
-        console.log('goal id', goal.id)
+        // console.log('goal id', goal.id)
         if(goal.id) {
             //make sure they're logged in
-            console.log('user info', user)
+            // console.log('user info', user)
            if(user) {
                 let goalUpdate = await db.goal.update({
                     name: req.body.name,
@@ -109,7 +115,7 @@ router.put('/:goalId', async (req,res) => {
             })
                res.render(`goals/show.ejs`, {
                    user: user,
-                   goal: goal
+                   goal: goal,
                })
            } else {
                res.redirect('/users/login?message=You must authenticate before you can view this resource!')

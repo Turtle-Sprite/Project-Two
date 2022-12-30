@@ -1,5 +1,20 @@
 <%- include('partials/header.ejs', {user}) %>
 
-<h2>Welcome Home, user</h2>
+<h2 class="homepage">Welcome Home, user</h2>
+
+<div class="container-md border my-5">Projects</div>
+    <div class="row align-items-center my-2" style="height: 100px">
+        <div class="col">All Projects</div>
+        <div class="col">New Projects</div>
+    </div>
+    <div class="row my-2">
+        <div class="col"><div class="child">All Goals</div></div>
+        <div class="col"><div class="child">New Goals</div></div>
+    </div>
+    <div class="row my-2">
+        <div class="col">All Tasks</div>
+        <div class="col">New Tasks</div>
+        <div class="col">Due Tasks</div>
+    </div>
 
 <%- include('partials/footer.ejs') %>

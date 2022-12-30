@@ -43,7 +43,8 @@ router.post('/', async (req, res) => {
             //place the encrypted id in a cookie
             res.cookie('userId', encryptedString) //sends cookie to browser, parses it in middleware in index.js
             //redirect to the user's profile
-            res.redirect('/users/profile')
+            res.redirect('/users/profile', {
+                message: req.query.message ? req.query.message : null})
         }
 
     } catch (err) {

@@ -19,6 +19,9 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: false}))
 //tell express to parse incoming cookies
 app.use(cookieParser())
+//middleware & static files to be made public
+app.use(express.static('public'))
+
 
 //custom auth middleware that checks the cookies for a user id
 // and it finds one, look ip the user in the db
@@ -70,7 +73,7 @@ app.get('/', (req,res) => {
         user: res.locals.user
     })
     //this will tell if user is signed in
-    console.log(res.locals.user)
+    // console.log(res.locals.user)
 })
 
 app.use("/users", require('./controllers/users'))

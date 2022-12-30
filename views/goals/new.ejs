@@ -1,17 +1,36 @@
+<%- include('../partials/header.ejs', {user}) %>
+
 <h1>Create a New Goal</h1>
 
-<form method="POST" action="/goals">
-    <fieldset>
-        <legend>New Goal</legend>
-    <label for="name">Goal name</label>
-    <input type="text" id="name" name="name" placeholder="Crystal's Party Plan">
 
-    <label for="description">Describe Event</label>
-    <textarea type="text" id="description" name="description" placeholder="An event to celebrate the completion of project 2"></textarea>
+<div class="container">
+    <div class="row justify-content-center my-3">
+        <div class="col-lg-6">
+            <form method="POST" action="/goals" class="row gy-2 gx-3 align-items-center">
+                <fieldset>
+                    <legend>New Goal</legend>
+                <div class="col-auto m-2 shadow-sm">
+                    <label for="name" class="form-label">Goal name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Crystal's Party Plan">
+                </div>
 
-    <label for="dueDate">Due Date</label>
-    <input type="date" id="dueDate" name="dueDate">
+                <div class="col-auto m-2 shadow-sm"> 
+                    <label for="description" class="form-label">Describe Event</label>
+                    <textarea type="text" class="form-control" id="description" name="description" placeholder="e.g. An event to celebrate the completion of project 2"></textarea>
+                </div>
 
-    <input type="submit" value="Submit">
-    </fieldset>
-</form>
+                <div class="col-auto m-3">
+                    <label for="dueDate" class="form-label">Due Date</label>
+                    <input type="date" class="shadow-sm form-control"id="dueDate" name="dueDate">
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-dark shadow-sm" type="submit">Submit</button>
+                </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
