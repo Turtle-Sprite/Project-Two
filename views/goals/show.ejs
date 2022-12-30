@@ -19,11 +19,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <p>Please select a photo header for your goal.</p>
+            <form method="POST" action="/goals/<%= goal.id %>">
+                <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
+                <button class="btn btn-primary" name="search">Search</button>
             
+            <% photo.forEach(photo => { %>
+                <label>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="<%= photo.id %>">
+                    <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max" id="<%= photo.id %>>" type="radio">
+                </label>
+            <% }) %>
+        </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="savePhoto">Save Photo</button>
         </div>
       </div>
     </div>
@@ -44,10 +55,10 @@
 
         <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
             <label for="delete">Delete Goal</label>
-            <button type="submit" id="delete" name="_method">Delete</button>
+            <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
             </form>
             
-            <a href="/goals/<%= goal.id %>/edit"><button type="submit" id="update" name="update">Update Goal</button></a>
+            <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
       </div>
       <div class="col-6 border border-1">
         <h3>All tasks</h3>

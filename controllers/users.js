@@ -120,10 +120,13 @@ router.get('/profile', (req, res) => {
     }
 })
 
-
-router.get('/photo', (req, res) => {
+router.get('/photo', async (req, res) => {
     try {
-        res.render('users/photo.ejs')
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
+        res.render('users/photo.ejs', {photo: response.data.results})
     } catch (err) {
         console.log(err)
         // res.status(500).send('server error')
@@ -137,6 +140,7 @@ router.post('/photo', async (req, res) => {
         const response = await axios.get(img_url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
+        console.log(response.data)
         // res.send('hello')
         res.render('users/photo.ejs', {
             photo: response.data.results

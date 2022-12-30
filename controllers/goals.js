@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const axios = require('axios')
 
 const db = require('../models')
+const { where } = require('sequelize')
 
 const API_KEY = process.env.APIKEY
 
@@ -47,7 +48,10 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
-        
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
@@ -60,7 +64,8 @@ router.get('/:goalId', async (req,res) => {
                 res.render('goals/show.ejs', {
                     user: user,
                     goal: goal,
-                    message: req.query.message ? req.query.message : null
+                    message: req.query.message ? req.query.message : null,
+                    photo: response.data.results
                 })
             } else {
                 res.redirect('/users/login?message=You must authenticate before you can view this resource!')
@@ -91,9 +96,41 @@ router.get('/:goalId/edit', async (req,res) =>{
     }
 })
 
+//POST //:goalId/ posts a photo to goalId page
+//post /goals/photos shows a photo on the page
+router.post('/:goalId', async (req, res) => {
+    try {
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
+        let goal = await db.goal.findOne({
+            where: { id: req.params.goalId }
+        })
+        await goal.update(
+        {img_url: req.body.imgChecked},
+        {
+        where: {id: req.params.goalId}
+        }
+        )
+        // res.send('hello')
+        res.render('goals/show.ejs', {
+            goal: goal,
+            photo: response.data.results
+        })
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
+})
+
 //  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
 router.put('/:goalId', async (req,res) => {
     try{
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
@@ -104,7 +141,7 @@ router.put('/:goalId', async (req,res) => {
             //make sure they're logged in
             // console.log('user info', user)
            if(user) {
-                let goalUpdate = await db.goal.update({
+                let goal = await db.goal.update({
                     name: req.body.name,
                     description: req.body.description,
                     img_url: req.body.img_url,
@@ -113,9 +150,10 @@ router.put('/:goalId', async (req,res) => {
                 {
                 where: {id: req.params.goalId }
             })
-               res.render(`goals/show.ejs`, {
+               res.redirect(`goals/:goalId`, {
                    user: user,
                    goal: goal,
+                   photo: response.data.results
                })
            } else {
                res.redirect('/users/login?message=You must authenticate before you can view this resource!')
