@@ -7,12 +7,21 @@ const axios = require('axios')
 
 const db = require('../models')
 const { where } = require('sequelize')
+const { application } = require('express')
 
 const API_KEY = process.env.APIKEY
 
 //res.locals.user comes from middleware, tells us if user is logged in and the PK of the user in our database
 
-//GET // / -- form with new goal - Check
+//GET // / . -- goals homepage, displays all goals
+router.get('/', async (req, res) =>{
+    const goal = await db.goal.findAll()
+    res.render('goals/allgoals', {
+        goal: goal
+    })
+} )
+
+//GET // /new -- form with new goal - Check
 router.get('/new', (req,res) =>{
 res.render('goals/new.ejs')
 })

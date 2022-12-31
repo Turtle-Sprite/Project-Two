@@ -1,5 +1,20 @@
 <%- include('../partials/header.ejs', {user}) %>
 
+<div class="m-3">
+    <h2 class="p-2">All Goals</h2>
+</div>
 
-
+<div class="list-group m-3">
+    <% goal.forEach(goal => { %>
+        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-30 justify-content-between">
+            <h5 class="mb-1"><%= goal.name %></h5>
+            <span class="badge bg-primary rounded-pill">14</span>
+            </div>
+            <p class="mb-1"><%= goal.description %></p>
+            <p class="mb-1"> Due Date: <%= goal.due_date %></p>
+        </a>
+        
+    <% }) %>
+</div>
 <%- include('../partials/footer.ejs') %>

@@ -1,6 +1,17 @@
 <%- include('partials/header.ejs', {user}) %>
 
-<h2 class="homepage">Welcome Home, user</h2>
+<% if(!user) { %>
+    <h1 class="p-2">Start your project</h1>
+    <div class="m-3 d-flex justify-content-center">
+        <div class="col-md-6 m-2 shadow-sm">
+        <p>With this project management tool, you can create projects, set goals, and update tasks. It's everything you need to stay organized. 
+        </p>
+        </div>
+        <div class="col-md-4 m-2 shadow-sm">
+            <h5><a href="/users/new">Sign Up for an Account</a></h5>
+        </div>
+    </div>
+<% } else {%>
 
 <div class="container-md border my-5">Projects</div>
     <div class="row align-items-center my-2" style="height: 100px">
@@ -8,13 +19,14 @@
         <div class="col">New Projects</div>
     </div>
     <div class="row my-2">
-        <div class="col"><div class="child">All Goals</div></div>
-        <div class="col"><div class="child">New Goals</div></div>
+        <div class="col"><div class="child">Tools</div></div>
+        <div class="col"><div class="child">Resources</div></div>
     </div>
     <div class="row my-2">
         <div class="col">All Tasks</div>
         <div class="col">New Tasks</div>
         <div class="col">Due Tasks</div>
     </div>
+<% } %> 
 
 <%- include('partials/footer.ejs') %>
