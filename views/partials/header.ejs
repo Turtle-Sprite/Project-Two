@@ -88,17 +88,17 @@
         <% if (user) { %>
         <!-- start logout-->
         <div class="d-flex justify-content-end">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white"></ul>
-              <a class="nav-link active" aria-current="page" href="/users/logout">Logout</a>
-          </ul>
+          <li class="nav-item text-white list-unstyled">
+            <a class="nav-link active" aria-current="page" href="/users/logout">Logout</a>
+        </li>
         
           <!-- End logout -->
 
           <!-- if user is logged out, show login button -->
           <% } else { %> 
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white"></ul>
+            <li class="nav-item text-white list-unstyled">
               <a class="nav-link active" aria-current="page" href="/users/login">Login</a>
-          </ul>
+          </li>
           <% } %> 
         </div>
           <!-- End of navbar content -->

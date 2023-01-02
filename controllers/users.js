@@ -18,7 +18,7 @@ router.get('/new', (req, res) => {
 })
 
 // POST /users -- creates a new user from the form @ /users/new
-router.post('/', async (req, res) => {
+router.post('/profile', async (req, res) => {
     try {
         //check if user exists/create if not
         const [newUser, created] = await db.user.findOrCreate({
@@ -43,8 +43,7 @@ router.post('/', async (req, res) => {
             //place the encrypted id in a cookie
             res.cookie('userId', encryptedString) //sends cookie to browser, parses it in middleware in index.js
             //redirect to the user's profile
-            res.redirect('/users/profile', {
-                message: req.query.message ? req.query.message : null})
+            res.redirect('/users/profile')
         }
 
     } catch (err) {

@@ -106,7 +106,6 @@ router.get('/:goalId/edit', async (req,res) =>{
 })
 
 //POST //:goalId/ posts a photo to goalId page
-//post /goals/photos shows a photo on the page
 router.post('/:goalId', async (req, res) => {
     try {
         const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
@@ -136,10 +135,6 @@ router.post('/:goalId', async (req, res) => {
 //  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
 router.put('/:goalId', async (req,res) => {
     try{
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
@@ -150,20 +145,16 @@ router.put('/:goalId', async (req,res) => {
             //make sure they're logged in
             // console.log('user info', user)
            if(user) {
-                let goal = await db.goal.update({
+                let goalUpdate = await db.goal.update({
                     name: req.body.name,
                     description: req.body.description,
-                    img_url: req.body.img_url,
                     due_date: req.body.dueDate
                 },
                 {
                 where: {id: req.params.goalId }
             })
-               res.redirect(`goals/:goalId`, {
-                   user: user,
-                   goal: goal,
-                   photo: response.data.results
-               })
+            // console.log('this is the goal.id', goalId)
+               res.redirect(`/goals/${goal.id}`)
            } else {
                res.redirect('/users/login?message=You must authenticate before you can view this resource!')
            }

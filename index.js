@@ -1,19 +1,20 @@
 // require packages
 require('dotenv').config()
 const express = require('express')
+const app = express()
 const cookieParser = require('cookie-parser')
 const db = require('./models')
 const crypto = require('crypto-js')
 //allows deletion and updating of html forms
 const methodOverride = require('method-override')
+//send method override to all downstream express routes
+app.use(methodOverride('_method'))
 
 //app config
-const app = express()
 //will use the devevlopment port OR port 8010 if its not available
 const PORT = process.env.PORT || 8010
 app.set('view engine', 'ejs')
-//send method override to all downstream express routes
-app.use(methodOverride('_method'))
+
 
 //middleware - requests bodies from html forms
 app.use(express.urlencoded({ extended: false}))
@@ -22,6 +23,15 @@ app.use(cookieParser())
 //middleware & static files to be made public
 app.use(express.static('public'))
 
+//new error messages?
+app.use(( err, req, res, next ) => {
+    res.locals.error = err;
+    if (err.status >= 100 && err.status < 600)
+      res.status(err.status);
+    else
+      res.status(500);
+    res.render('error');
+  });
 
 //custom auth middleware that checks the cookies for a user id
 // and it finds one, look ip the user in the db

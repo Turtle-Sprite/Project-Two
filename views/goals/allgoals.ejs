@@ -6,15 +6,15 @@
 
 <div class="list-group m-3">
     <% goal.forEach(goal => { %>
-        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        <a href="/goals/<%=goal.id %>" class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-30 justify-content-between">
             <h5 class="mb-1"><%= goal.name %></h5>
             <span class="badge bg-primary rounded-pill">14</span>
-            </div>
+        </div>
             <p class="mb-1"><%= goal.description %></p>
             <p class="mb-1"> Due Date: <%= goal.due_date %></p>
         </a>
-        
+        <a href="/goals/<%=goal.id %>/edit"><span class="btn bg-primary rounded-pill">Update</span></a>
     <% }) %>
 </div>
 <%- include('../partials/footer.ejs') %>
