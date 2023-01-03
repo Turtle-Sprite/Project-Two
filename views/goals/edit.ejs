@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center my-3">
         <div class="col-lg-6"></div>
-            <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
+            <form method="POST" action="/goals/<%= goal.id %>?_method=PUT" name="update-goal">
                 <fieldset>
                     <legend>Update Goal</legend>
 
@@ -27,14 +27,14 @@
                 <p>Choose an image for your goal:</p>
                 <%  %> 
                 
-                <p>Update goal's progress:</p>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <label for="progress">Update goal's progress:</label>
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="progress" name="progress" form="update-goal">
                     <option selected>Update Progress</option>
                     <option value="Not-Started">Not Started</option>
                     <option value="In-Progress">In Progress</option>
                     <option value="Complete">Complete</option>
                   </select>
-
+                  
                 <div class="text-center">
                     <button type="submit" class="btn btn-dark shadow-sm" id="update" name="_method">Update Goal</button>
                 </div>

@@ -57,6 +57,7 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
+        console.log('this is the req.params coming up undefined', req.params.goalId)
         const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
         const response = await axios.get(img_url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
@@ -85,7 +86,7 @@ router.get('/:goalId', async (req,res) => {
         }
 
     }catch (err) {
-        console.log('Error on /goalsid', err )
+        console.log('Error on GET /:goalsid', err )
     }
 })
 
@@ -140,20 +141,24 @@ router.put('/:goalId', async (req,res) => {
             where: { id: req.params.goalId }
         })
         //make sure the goal exists
-        // console.log('goal id', goal.id)
+        console.log('goal id', goal.id)
         if(goal.id) {
             //make sure they're logged in
             // console.log('user info', user)
+            console.log('this is the first console.log in the PUT method', goal.id)
+            console.log(req.body)
            if(user) {
                 let goalUpdate = await db.goal.update({
                     name: req.body.name,
                     description: req.body.description,
-                    due_date: req.body.dueDate
+                    due_date: req.body.dueDate,
+                    complete: req.body.progress,
+                    public: req.body.public
                 },
                 {
                 where: {id: req.params.goalId }
             })
-            // console.log('this is the goal.id', goalId)
+            console.log('this is the goal progress', goalUpdate.complete)
                res.redirect(`/goals/${goal.id}`)
            } else {
                res.redirect('/users/login?message=You must authenticate before you can view this resource!')
