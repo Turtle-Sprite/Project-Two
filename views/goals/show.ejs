@@ -3,42 +3,24 @@
 <div></div>
 <p>You are signed in as <%= user %></p>
 
-<!-- Button trigger modal -->
-<div class="text-center">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-   Choose a Photo
-</button>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <p>Please select a photo header for your goal.</p>
-            <form method="POST" action="/goals/<%= goal.id %>">
-                <input class="form-check-input flex-wrap" type="radio" name="flexRadioDefault" id="<%= photo.id %>">
-                <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
-                <button class="btn btn-primary" name="search">Search</button>
-            
-            <% photo.forEach(photo => { %>
-                <label class="my-2 d-flex">
-                    <img src="<%= photo.urls.regular %>&fm=jpg&w=150&fit=max&h=75" id="<%= photo.id %>>" type="radio">
-                </label>
-            <% }) %>
-        </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="savePhoto">Save Photo</button>
-        </div>
-      </div>
-    </div>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6">
+  <p>Please select a photo header for your goal.</p>
+  <form method="POST" action="/goals/<%= goal.id %>">
+        <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
+        <button class="btn btn-primary my-3" name="search">Search</button>
   </div>
+  </div>
+  <div class="container text-center bg-secondary bg-gradient">
+    <% photo.forEach(photo => { %>
+        <label for "images" class="m-1">
+              <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" type="radio">
+          </label>
+    <% }) %>
+  </div>
+</form>
+</div>
 
 <img src="..." class="img-fluid" alt="...">
 
