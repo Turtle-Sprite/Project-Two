@@ -3,26 +3,7 @@
 <div></div>
 <p>You are signed in as <%= user %></p>
 
-
-<div class="row d-flex justify-content-center">
-  <div class="col-md-6">
-  <p>Please select a photo header for your goal.</p>
-  <form method="POST" action="/goals/<%= goal.id %>">
-        <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
-        <button class="btn btn-primary my-3" name="search">Search</button>
-  </div>
-  </div>
-  <div class="container text-center bg-secondary bg-gradient">
-    <% photo.forEach(photo => { %>
-        <label for "images" class="m-1">
-              <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" type="radio">
-          </label>
-    <% }) %>
-  </div>
-</form>
-</div>
-
-<img src="..." class="img-fluid" alt="...">
+<img src="<%= goal.img_url %>" class="goalheader" alt="...">
 
 <div class="container text-center">
     <div class="row">
@@ -54,4 +35,23 @@
     </div>
   </div>
 
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+    <p>Please select a photo header for your goal.</p>
+    <form method="POST" action="/goals/<%= goal.id %>">
+          <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
+          <button class="btn btn-primary my-3" name="search">Search</button>
+    </div>
+    </div>
+    <div class="container text-center bg-secondary bg-gradient">
+      <% photo.forEach(photo => { %>
+        <label class="m-1">
+          <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>">
+              <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" alt="<%= photo.description %>" class="img-thumbnail">
+        </label>
+      <% }) %>
+      <button type="submit" class="btn btn-primary my-3">Select Photo</button>
+    </div>
+  </form>
+  </div>
 <%- include('../partials/footer.ejs') %>
