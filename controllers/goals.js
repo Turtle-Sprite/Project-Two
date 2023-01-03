@@ -146,21 +146,20 @@ router.put('/:goalId', async (req,res) => {
             //make sure they're logged in
             // console.log('user info', user)
             console.log('this is the first console.log in the PUT method', goal.id)
-            console.log(req.body)
            if(user) {
                 let goalUpdate = await db.goal.update({
-                    name: req.body.name,
-                    description: req.body.description,
-                    due_date: req.body.dueDate,
-                    complete: req.body.progress,
-                    public: req.body.public
-                },
-                {
-                where: {id: req.params.goalId }
-            })
-            console.log('this is the goal progress', goalUpdate.complete)
+                        name: req.body.name,
+                        description: req.body.description,
+                        due_date: req.body.dueDate,
+                        complete: req.body.progress,
+                        public: req.body.public
+                    },
+                    {
+                    where: {id: req.params.goalId }
+                })
+                console.log('this is the goal progress', goal.id)
                res.redirect(`/goals/${goal.id}`)
-           } else {
+            } else {
                res.redirect('/users/login?message=You must authenticate before you can view this resource!')
            }
        } else {
