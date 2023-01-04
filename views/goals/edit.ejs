@@ -21,23 +21,15 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-6">
                                 <p>Please select a photo header for your goal.</p>
-                                <input type="text" class="form-control shadow-sm" name="photoSearch"
+                                <input type="text" class="form-control shadow-sm" id="searchInput" name="photoSearch"
                                     placeholder="Search 'workout'">
                                 <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
                                 <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
-                                    <button type="submit" class="btn btn-primary my-3">Select Photo</button>
+                                <button type="submit" class="btn btn-primary my-3">Select Photo</button>
                             </div>
                         </div>
-                        <div class="container text-center bg-secondary bg-gradient">
-                            <% photo.forEach(photo=> { %>
-                                <label class="m-1">
-                                    <input type="radio" id="<%= photo.id %>" name="images"
-                                        value="<%= photo.urls.regular %>" class="hideRadio">
-                                    <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150"
-                                        id="<%= photo.id %>>" class="images" alt="<%= photo.description %>"
-                                        class="img-thumbnail">
-                                </label>
-                                <% }) %>
+                        <div class="container text-center bg-secondary bg-gradient imgResults">
+                            
                         </div>
                     </div>
                 </div>
@@ -111,12 +103,24 @@
 </div>
 
 <script>
-    const searchPhoto = document.getElementsByClassName('photoSearch')
+    console.log('script is running')
+    const searchPhoto = document.querySelector('.photoSearch')
+    const searchInput = document.querySelector('#searchInput')
+    const imageResults = document.querySelector('.imgResults')
     searchPhoto.addEventListener('click', async function () {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
+        const response = await fetch(`/api/${searchInput.value}`)
+        const data = await response.json()
+        console.log(imageResults)
+        let htmlString = ""
+        data.forEach(photo=> { 
+            htmlString += `<label class=\"m-1\">
+                <input type=\"radio\" id=\"${photo.id}" name=\"images\" value=\"${photo.urls.regular}\" class=\"hideRadio\">
+                <img src=\"${photo.urls.regular}&fm=jpg&w=200&fit=max&h=150\"
+                    id=\"${photo.id} \" class=\"images\" alt=\"${photo.alt_description}\" class=\"img-thumbnail\">
+            </label>`
+            })
+            // console.log(htmlString)
+            imageResults.innerHTML = htmlString
     })
 
 </script>

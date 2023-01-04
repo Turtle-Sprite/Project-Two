@@ -5,6 +5,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const db = require('./models')
 const crypto = require('crypto-js')
+const axios = require('axios')
 //allows deletion and updating of html forms
 const methodOverride = require('method-override')
 //send method override to all downstream express routes
@@ -14,7 +15,7 @@ app.use(methodOverride('_method'))
 //will use the devevlopment port OR port 8010 if its not available
 const PORT = process.env.PORT || 8010
 app.set('view engine', 'ejs')
-
+const API_KEY = process.env.APIKEY
 
 //middleware - requests bodies from html forms
 app.use(express.urlencoded({ extended: false}))
@@ -22,7 +23,8 @@ app.use(express.urlencoded({ extended: false}))
 app.use(cookieParser())
 //middleware & static files to be made public
 app.use(express.static('public'))
-
+//JSON data response
+app.use(express.json())
 
 //custom auth middleware that checks the cookies for a user id
 // and it finds one, look ip the user in the db
@@ -76,7 +78,14 @@ app.get('/', (req,res) => {
     //this will tell if user is signed in
     // console.log(res.locals.user)
 })
-
+app.get('/api/:search', async (req, res) => {
+    const search = req.params.search
+    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${search}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
+    res.json(response.data.results)
+})
 app.use("/users", require('./controllers/users'))
 app.use("/goals", require('./controllers/goals'))
 
