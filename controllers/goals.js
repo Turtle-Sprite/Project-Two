@@ -49,7 +49,7 @@ router.post('/', async (req,res) =>{
         //find or create a goal
         const [newGoal, createdGoal] = await db.goal.findOrCreate({
             where: {
-                name: req.body.name.toLowerCase()
+                name: req.body.name
             }, 
             defaults: {
             description: req.body.description,
@@ -168,16 +168,18 @@ router.put('/:goalId', async (req,res) => {
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
         })
+        console.log(req.body.images)
         //make sure the goal exists
         if(goal.id) {
             //make sure they're logged in
             // console.log('user info', user)
-            console.log('this is the first console.log in the PUT method', req.body.progress)
+            // console.log('this is the first console.log in the PUT method', req.body.progress)
            if(user) {
                 let goalUpdate = await db.goal.update({
                         name: req.body.name,
                         description: req.body.description,
                         due_date: req.body.dueDate,
+                        img_url: req.body.images,
                         complete: req.body.progress,
                         public: req.body.public
                     },

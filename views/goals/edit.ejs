@@ -24,7 +24,7 @@
                                 <input type="text" class="form-control shadow-sm" id="searchInput" name="photoSearch"
                                     placeholder="Search 'workout'">
                                 <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
-                                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
+                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                                 <button type="submit" class="btn btn-primary my-3">Select Photo</button>
                             </div>
                         </div>
@@ -116,11 +116,12 @@
             htmlString += `<label class=\"m-1\">
                 <input type=\"radio\" id=\"${photo.id}" name=\"images\" value=\"${photo.urls.regular}\" class=\"hideRadio\">
                 <img src=\"${photo.urls.regular}&fm=jpg&w=200&fit=max&h=150\"
-                    id=\"${photo.id} \" class=\"images\" alt=\"${photo.alt_description}\" class=\"img-thumbnail\">
+                    id=\"${photo.id} \" class=\"images img-thumbnail\" alt=\"${photo.alt_description}\">
             </label>`
             })
             // console.log(htmlString)
             imageResults.innerHTML = htmlString
+            console.log(htmlString)
     })
 
 </script>

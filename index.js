@@ -78,6 +78,7 @@ app.get('/', (req,res) => {
     //this will tell if user is signed in
     // console.log(res.locals.user)
 })
+//Send the photos to this URL so we can grab them with a fetch request from our OWN site.
 app.get('/api/:search', async (req, res) => {
     const search = req.params.search
     const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${search}>`
@@ -86,6 +87,7 @@ app.get('/api/:search', async (req, res) => {
         })
     res.json(response.data.results)
 })
+
 app.use("/users", require('./controllers/users'))
 app.use("/goals", require('./controllers/goals'))
 
