@@ -1,13 +1,22 @@
-/* HIDE RADIO */
+
 body {
   background: rgb(191, 195, 203);
 }
-fieldset {
-  border: 1px solid grey; 
-  background: rgb(178, 193, 209);
-  border-radius: 10px;
+.accordHead {
+  background: rgb(215, 226, 239);
 }
-img[type=radio] { 
+.accordHeadButton, .accordHeadButton2  {
+  border: 1px solid grey; 
+  background: rgb(215, 226, 239);
+}
+.accordHeadButton {
+  margin-top: 10px;
+}
+.accordHeadButton2 {
+  margin-bottom: 10px;
+}
+/* HIDE RADIO */
+.hideRadio[type=radio] { 
     position: absolute;
     opacity: 0;
     width: 0;
