@@ -33,9 +33,16 @@ body {
     outline: 7px solid rgb(138, 180, 228);
     border-radius: 10px;
   }
-  .goalheader {
+  .goalheaderimg {
     width: 70%;
     height: 200px;
-    margin-left: 20%;
-    margin-right:20%; 
+    border-radius: 30px;
+    background-color: aliceblue;
+    padding: 4px;
+  }
+  .headerPhoto {
+    background-color: greenyellow;
+    padding: 2px;
+    width: 80%;
+    
   }

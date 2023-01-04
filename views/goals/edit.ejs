@@ -25,7 +25,7 @@
                                     placeholder="Search 'workout'">
                                 <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
                 <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
-                                <button type="submit" class="btn btn-primary my-3">Select Photo</button>
+                                <button type="submit" class="btn btn-primary my-3 photoSelect">Select Photo</button>
                             </div>
                         </div>
                         <div class="container text-center bg-secondary bg-gradient imgResults">
@@ -103,14 +103,18 @@
 </div>
 
 <script>
+
+    //FETCH to my server for info from backend, which will prevent page from refreshing
     console.log('script is running')
     const searchPhoto = document.querySelector('.photoSearch')
     const searchInput = document.querySelector('#searchInput')
     const imageResults = document.querySelector('.imgResults')
+    const photoSelect = document.querySelector('.photoSelect')
+
     searchPhoto.addEventListener('click', async function () {
         const response = await fetch(`/api/${searchInput.value}`)
         const data = await response.json()
-        console.log(imageResults)
+        // console.log(imageResults)
         let htmlString = ""
         data.forEach(photo=> { 
             htmlString += `<label class=\"m-1\">
@@ -121,7 +125,20 @@
             })
             // console.log(htmlString)
             imageResults.innerHTML = htmlString
-            console.log(htmlString)
+            // console.log(htmlString)
+    })
+
+    photoSelect.addEventListener('click', async function () {
+        console.log('I\'m clicked')
+        //grab elements, get data.id to identify photo id
+        const searchInput = document.querySelector('#searchInput')
+        const response = await fetch(`/api/${searchInput.value}`)
+        const data = await response.json()
+        // console.log(data)
+        //grab the radio elements
+        const checkedImage = document.querySelector('.images')
+        console.log(checkedImage)
+        // if()
     })
 
 </script>
