@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('projects', {
+    await queryInterface.createTable('goals', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,6 +21,18 @@ module.exports = {
       due_date: {
         type: Sequelize.DATE
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
+      projectId: {
+        type: Sequelize.INTEGER
+      },
+      complete: {
+        type: Sequelize.STRING
+      },
+      public: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -32,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('projects');
+    await queryInterface.dropTable('goals');
   }
 };

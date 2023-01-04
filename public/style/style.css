@@ -1,5 +1,13 @@
 /* HIDE RADIO */
-[type=radio] { 
+body {
+  background: rgb(191, 195, 203);
+}
+fieldset {
+  border: 1px solid grey; 
+  background: rgb(178, 193, 209);
+  border-radius: 10px;
+}
+img[type=radio] { 
     position: absolute;
     opacity: 0;
     width: 0;
@@ -19,5 +27,6 @@
   .goalheader {
     width: 70%;
     height: 200px;
-
+    margin-left: 20%;
+    margin-right:20%; 
   }

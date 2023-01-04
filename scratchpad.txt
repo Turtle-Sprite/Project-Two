@@ -1,15 +1,29 @@
 
-Creating a User
-sequelize model:create --name user --attributes email:string,password:string,fName:string,lName:string,bio:string
+***Creating a User
+sequelize model:create --name user --attributes email:string,password:string,fName:string,lName:string,bio:string,
 
-Creating a project
-sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date,userId:integer
+Associations:
+models.user.hasMany(models.project)
 
-Creating a goal
-sequelize model:create --name goal --attributes name:string,description:string,img_url:string,due_date:date,userId:integer
+***Creating a project
+sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date,userId:integer,public:string,progress:string
 
-Creating a task
+Associations:
+models.project.belongsTo(models.user)
+models.project.hasMany(models.goal)
+
+***Creating a goal
+sequelize model:create --name goal --attributes name:string,description:string,img_url:string,due_date:date,userId:integer,projectId:integer,complete:string,public:string
+
+Associations:
+models.goal.belongsTo(models.project)
+models.goal.hasMany(models.task)
+
+***Creating a task
 sequelize model:create --name task --attributes name:string,description:string,due_date:date
+
+Associations:
+models.task.belongsTo(models.goal)
 
 Unmigrate the database:
 sequelize db:migrate:undo:all
@@ -20,3 +34,4 @@ Add in the models above with --force
 sequelize model:create --name task --attributes name:string,description:string,due_date:date --force 
 ^will force a new update to models
 sequelize db:migrate
+Update associations

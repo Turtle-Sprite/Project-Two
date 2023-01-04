@@ -8,7 +8,7 @@
     <div class="row justify-content-center my-3">
         <div class="col-lg-6">
             <form method="POST" action="/goals" class="row gy-2 gx-3 align-items-center">
-                <fieldset style="border: 1px solid grey" class="shadow-sm">
+                <fieldset class="shadow-sm">
                     <legend>New Goal</legend>
                 <div class="col-auto m-2 shadow-sm">
                     <label for="name" class="form-label">Goal name</label>
@@ -23,6 +23,13 @@
                 <div class="col-auto m-3">
                     <label for="dueDate" class="form-label">Due Date</label>
                     <input type="date" class="shadow-sm form-control"id="dueDate" name="dueDate">
+                </div>
+                <div class="col-auto m-3">
+                    <label for="public" class="form-label">Public or Private?</label>
+                        <input type="radio" id="public" name="public" value="Public" checked>
+                        <label for="Public">Public</label>
+                        <input type="radio" id="private" name="public" value="Private">
+                        <label for="Private">Private</label>
                 </div>
 
                 <div class="text-center my-2">

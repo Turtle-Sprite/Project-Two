@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     img_url: DataTypes.STRING,
     due_date: DataTypes.DATE,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    projectId: DataTypes.INTEGER,
+    complete: DataTypes.STRING,
+    public: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'goal',

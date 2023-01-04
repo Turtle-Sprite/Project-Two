@@ -1,46 +1,72 @@
 <%- include('../partials/header.ejs', {user}) %>
 <!-- This page is linked by the href in the a tag surrounding the update button on the goal show page -->
-<h1>Update <%= goal.name %></h1>
+<h1>Update <%= goal.name %>
+</h1>
 
 <div class="container">
     <div class="row justify-content-center my-3">
         <div class="col-lg-6"></div>
-            <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
-                <fieldset>
-                    <legend>Update Goal</legend>
+        <form method="POST" action="/goals/<%= goal.id %>?_method=PUT" class="row gy-2 gx-3 align-items-center">
+            <fieldset class="shadow-sm p-3">
+                <legend>Update Goal</legend>
 
                 <label for="name" class="form-label">Goal name</label>
                 <input type="text" class="form-control shadow-sm" id="name" name="name" value="<%= goal.name %>">
 
                 <label for="description" class="form-label"></label>Describe Event</label>
-                <textarea 
-                    type="text" 
-                    class="form-control shadow-sm" 
-                    id="description" 
-                    name="description"
-                    cols="10"
+                <textarea type="text" class="form-control shadow-sm" id="description" name="description" cols="10"
                     rows="5"><%= goal.description %></textarea>
 
                 <label for="dueDate" class="form-label">Due Date</label>
-                <input type="date" class="form-control shadow-sm" id="dueDate" name="dueDate" value="<%= goal.due_date %>">
+                <input type="date" class="form-control shadow-sm" id="dueDate" name="dueDate"
+                    value="<%= goal.due_date %>">
 
                 <p>Choose an image for your goal:</p>
-                <%  %> 
-                
-                <label for="progress">Update goal's progress:</label>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="progress" name="progress">
-                    <option selected>Update Progress</option>
-                    <option value="Not-Started">Not Started</option>
-                    <option value="In-Progress">In Progress</option>
-                    <option value="Complete">Complete</option>
-                  </select>
-                  
-                <div class="text-center">
-                    <button type="submit" class="btn btn-dark shadow-sm" id="update">Update Goal</button>
-                </div>
-                </fieldset>
-            </form>
+                <% %>
+
+                    <label for="progress">Update goal's progress:</label>
+                    <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
+                        id="progress" name="progress">
+                        <option selected>Update Progress</option>
+                        <option value="Not-Started">Not Started</option>
+                        <option value="In-Progress">In Progress</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+
+                    <div class="col-auto m-3">
+                        <label for="public" class="form-label">Public or Private?</label>
+                        <div class="mx-2">
+                            <input type="radio" id="public" name="public" value="Public" class="mx-2" checked>
+                            <label for="Public">Public</label>
+                            <input type="radio" id="private" name="public" value="Private" class="mx-2">
+                            <label for="Private">Private</label>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark shadow-sm" id="update">Update Goal</button>
+                    </div>
+            </fieldset>
+        </form>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <p>Please select a photo header for your goal.</p>
+                <form method="POST" action="/goals/<%= goal.id %>">
+                    <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
+                    <button class="btn btn-primary my-3" name="search">Search</button>
+            </div>
         </div>
+        <div class="container text-center bg-secondary bg-gradient">
+            <% photo.forEach(photo=> { %>
+                <label class="m-1">
+                    <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>">
+                    <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" class="images"
+                        alt="<%= photo.description %>" class="img-thumbnail">
+                </label>
+                <% }) %>
+                    <button type="submit" class="btn btn-primary my-3">Select Photo</button>
+        </div>
+                </form>
     </div>
 </div>
-    <%- include('../partials/footer.ejs') %>
+            <%- include('../partials/footer.ejs') %>

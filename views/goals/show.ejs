@@ -47,11 +47,11 @@
       <% photo.forEach(photo => { %>
         <label class="m-1">
           <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>">
-              <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" alt="<%= photo.description %>" class="img-thumbnail">
+              <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" class="images" alt="<%= photo.description %>" class="img-thumbnail">
         </label>
       <% }) %>
       <button type="submit" class="btn btn-primary my-3">Select Photo</button>
     </div>
   </form>
-  </div>
+</div>
 <%- include('../partials/footer.ejs') %>

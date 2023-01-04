@@ -22,8 +22,25 @@ router.get('/', async (req, res) =>{
 } )
 
 //GET // /new -- form with new goal - Check
-router.get('/new', (req,res) =>{
-res.render('goals/new.ejs')
+router.get('/new', async (req,res) =>{
+    try {
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
+        let user = await res.locals.user
+        if(user) {
+            res.render('goals/new.ejs', {
+                user: user,
+                message: req.query.message ? req.query.message : null,
+                photo: response.data.results
+            })
+        } else {
+            res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+        }
+    } catch(err) {
+        console.log('/get/new form', err)
+    }
 })
 
 // POST // / --create the new goal -- redirect to profile
@@ -36,13 +53,15 @@ router.post('/', async (req,res) =>{
             }, 
             defaults: {
             description: req.body.description,
-            due_date: req.body.dueDate
+            img_url: req.body.images,
+            due_date: req.body.dueDate,
+            complete: req.body.progress,
+            public: req.body.public
             }
         })
         // console.log(newGoal)
         //if goal exists, redirect to goals page
         if (!createdGoal) {
-            
             res.redirect('goals/new')
         } else {
             // if we create a new goal, redirect to that page here
@@ -89,19 +108,24 @@ router.get('/:goalId', async (req,res) => {
     }
 })
 
-//GET // //:goalId/edit shows the edit form - redirect to /:goalId in PUT route
+//GET // /:goalId/edit shows the edit form - redirect to /:goalId in PUT route
 router.get('/:goalId/edit', async (req,res) =>{
-    let user = await res.locals.user.email
-    let goal = await db.goal.findOne({
-        where: { id: req.params.goalId }
-    })
-    if (!user) {
-        res.redirect('/users/login?message=Please log in to continue.')
-    } else {
-        res.render('goals/edit.ejs', {
-            user: user,
-            goal: goal,
+    try {
+        let user = await res.locals.user
+        let goal = await db.goal.findOne({
+            where: { id: req.params.goalId }
         })
+        if (!user) {
+            res.redirect('/users/login?message=Please log in to continue.')
+        } else {
+            console.log('get request is working with goal', goal)
+            res.render('goals/edit', {
+                user: user,
+                goal: goal
+            })
+        }
+    } catch (err) {
+        console.log('/get/:goalId/edit form page', err)
     }
 })
 
@@ -143,7 +167,7 @@ router.put('/:goalId', async (req,res) => {
         if(goal.id) {
             //make sure they're logged in
             // console.log('user info', user)
-            console.log('this is the first console.log in the PUT method', goal.id)
+            console.log('this is the first console.log in the PUT method', req.body.progress)
            if(user) {
                 let goalUpdate = await db.goal.update({
                         name: req.body.name,
