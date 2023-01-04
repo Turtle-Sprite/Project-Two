@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       due_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       userId: {
         type: Sequelize.INTEGER

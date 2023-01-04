@@ -1,27 +1,32 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-<div></div>
+
 <p>You are signed in as <%= user %></p>
 
-<div class="row justify-content-center headerPhoto">
-<img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
+<div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center align-items-center headerPhoto">
+    <img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
+  </div>
 </div>
 
 <div class="container text-center">
   <div class="row">
-    <div class="col-md-2 border border-1">
-      <h5>Project Name: associated with goal</h5>
-      <h6>Other Goals: associated with this project</h6>
+    <div class="col-md-2 border border-1 projectInfoHeader">
+      <ul class="list-group">
+        <li class="list-group-item"><h5>Project Name: associated with goal</h5></li>
+        <li class="list-group-item"><h6>Other Goals: associated with this project</h6></li>
+      </ul>
     </div>
     <div class="col-md-4 border border-1">
-      <h2>Goal: <%= goal.name %></h2>
-      <p>Project Description: <%= goal.description %></p>
-      <p>Due Date: <%= goal.due_date %></p>
-      <p>Goal Progress: <%= goal.complete %></p>
-      <p>Who can see goal: <%= goal.public %></p>
-
+      <ul class="list-group">
+        <li class="list-group-item"><h2>Goal: <%= goal.name %></h2></li>
+        <li class="list-group-item"><p>Project Description: <%= goal.description %></p></li>
+        <li class="list-group-item"><p>Due Date: <%= goal.due_date %></p></li>
+        <li class="list-group-item"><p>Goal Progress: <%= goal.complete %></p></li>
+        <li class="list-group-item"><p>Who can see goal: <%= goal.public %></p></li>
+      </ul>
       <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
-          <label for="delete">Delete Goal</label>
+          <label for="delete"></label>
           <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
           </form>
           

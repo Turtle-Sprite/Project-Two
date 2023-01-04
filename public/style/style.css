@@ -39,10 +39,16 @@ body {
     border-radius: 30px;
     background-color: aliceblue;
     padding: 4px;
+    max-width: 600px;
+    max-height: 350px;
   }
   .headerPhoto {
-    background-color: greenyellow;
-    padding: 2px;
-    width: 80%;
-    
+    background-color: #189AB4;
+    padding: 6px;
+    width: 100%;
+    border-top: #D4F1F4 2px solid;
+    border-bottom: #D4F1F4 2px solid;
+  }
+  .projectInfoHeader {
+    background-color: rgb(215, 226, 239);
   }
