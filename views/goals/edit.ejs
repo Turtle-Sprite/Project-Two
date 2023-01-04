@@ -45,9 +45,14 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-dark shadow-sm" id="update">Update Goal</button>
                     </div>
-            </fieldset>
         </form>
-
+        <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhoto" aria-expanded="false" aria-controls="collapseExample">
+            Show Search
+        </button>
+        </p>
+        <div class="collapse" id="collapsePhoto">
+          <div class="card card-body">          
         <div class="row d-flex justify-content-center">
             <div class="col-md-6">
                 <p>Please select a photo header for your goal.</p>
@@ -67,6 +72,9 @@
                     <button type="submit" class="btn btn-primary my-3">Select Photo</button>
         </div>
                 </form>
+            </div> 
+        </div> 
+        </fieldset>
     </div>
 </div>
             <%- include('../partials/footer.ejs') %>

@@ -111,6 +111,10 @@ router.get('/:goalId', async (req,res) => {
 //GET // /:goalId/edit shows the edit form - redirect to /:goalId in PUT route
 router.get('/:goalId/edit', async (req,res) =>{
     try {
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const response = await axios.get(img_url, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
         let user = await res.locals.user
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
@@ -121,11 +125,12 @@ router.get('/:goalId/edit', async (req,res) =>{
             console.log('get request is working with goal', goal)
             res.render('goals/edit', {
                 user: user,
-                goal: goal
+                goal: goal,
+                photo: response.data.results
             })
         }
     } catch (err) {
-        console.log('/get/:goalId/edit form page', err)
+        console.log('GET /:goalId/edit form page', err)
     }
 })
 
