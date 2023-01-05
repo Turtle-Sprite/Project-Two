@@ -25,7 +25,6 @@
                                     placeholder="Search 'workout'">
                                 <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
                                 <button type="submit" class="btn btn-primary my-3 photoSelect">Select Photo</button>
-                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                             </div>
                         </div>
                         <div class="container text-center bg-secondary bg-gradient imgResults">
@@ -35,63 +34,64 @@
                 </div>
             </div>
         </div>
-            <!-- End first accordion -->
-
-            <!-- Beginning second accordion -->
+        <!-- End first accordion -->
+        
+        <!-- Beginning second accordion -->
         <div class="accordion" id="goalInfo">
             <div class="accordion-item accordHead">
                 <h2 class="accordion-header accordHead" id="goalPhoto">
                     <button class="accordion-button collapsed accordHeadButton2" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                        aria-controls="collapseTwo">
-                        Update Goal's Information
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse accordHead" aria-labelledby="goalPhoto"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <!-- form goal update -->
-                        <!-- PUT FORM for goal Data -->
+                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                    aria-controls="collapseTwo">
+                    Update Goal's Information
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse accordHead" aria-labelledby="goalPhoto"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <!-- form goal update -->
+                <!-- PUT FORM for goal Data -->
+                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                         
-                            <div class="row gy-2 gx-3 align-items-center">
-                            <legend>Update Goal</legend>
+                    <div class="row gy-2 gx-3 align-items-center">
+                    <legend>Update Goal</legend>
 
-                            <label for="name" class="form-label">Goal name</label>
-                            <input type="text" class="form-control shadow-sm" id="name" name="name"
-                                value="<%= goal.name %>" required>
-                            <label for="description" class="form-label"></label>Describe Event</label>
-                            <textarea type="text" class="form-control shadow-sm" id="description" name="description"
-                                cols="10" rows="5" required><%= goal.description %></textarea>
+                    <label for="name" class="form-label">Goal name</label>
+                    <input type="text" class="form-control shadow-sm" id="name" name="name"
+                        value="<%= goal.name %>" required>
+                    <label for="description" class="form-label"></label>Describe Event</label>
+                    <textarea type="text" class="form-control shadow-sm" id="description" name="description"
+                        cols="10" rows="5" required><%= goal.description %></textarea>
 
-                            <label for="dueDate" class="form-label">Due Date</label>
-                            <input type="date" class="form-control shadow-sm" id="dueDate" name="dueDate"
-                                value="<%= goal.due_date %>" required>
+                    <label for="dueDate" class="form-label">Due Date</label>
+                    <input type="date" class="form-control shadow-sm" id="dueDate" name="dueDate"
+                        value="<%= goal.due_date %>" required>
 
-                            <label for="progress">Update goal's progress:</label>
-                            <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
-                                id="progress" name="progress" required>
-                                <option selected>Update Progress</option>
-                                <option value="Not-Started">Not Started</option>
-                                <option value="In-Progress">In Progress</option>
-                                <option value="Complete">Complete</option>
-                            </select>
+                    <label for="progress">Update goal's progress:</label>
+                    <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
+                        id="progress" name="progress" required>
+                        <option selected>Update Progress</option>
+                        <option value="Not-Started">Not Started</option>
+                        <option value="In-Progress">In Progress</option>
+                        <option value="Complete">Complete</option>
+                    </select>
 
-                            <div class="col-auto m-3">
-                                <label for="public" class="form-label" required>Public or Private?</label>
-                                <div class="mx-2">
-                                    <input type="radio" id="public" name="public" value="Public" class="mx-2"
-                                        checked>
-                                    <label for="Public">Public</label>
-                                    <input type="radio" id="private" name="public" value="Private" class="mx-2">
-                                    <label for="Private">Private</label>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-dark shadow-sm" id="update">Update
-                                    Goal</button>
-                            </div>
-                            </div>
-                        </form>
+                    <div class="col-auto m-3">
+                        <label for="public" class="form-label" required>Public or Private?</label>
+                        <div class="mx-2">
+                            <input type="radio" id="public" name="public" value="Public" class="mx-2"
+                                checked>
+                            <label for="Public">Public</label>
+                            <input type="radio" id="private" name="public" value="Private" class="mx-2">
+                            <label for="Private">Private</label>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark shadow-sm" id="update">Update
+                            Goal</button>
+                    </div>
+                    </div>
+                </form>
                     </div>
                 </div>
             </div>

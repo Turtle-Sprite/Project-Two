@@ -43,7 +43,7 @@ router.get('/new', async (req,res) =>{
     }
 })
 
-// POST // / --create the new goal -- redirect to profile
+// POST // / --create the new goal -- redirect to goalId
 router.post('/', async (req,res) =>{
     try {
         //find or create a goal
@@ -109,7 +109,7 @@ router.get('/:goalId', async (req,res) => {
     }
 })
 
-//GET // /:goalId/edit shows the edit form - redirect to /:goalId in PUT route
+//GET // /:goalId/edit shows the edit form to edit information- redirect to /:goalId in PUT route
 router.get('/:goalId/edit', async (req,res) =>{
     try {
         const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
@@ -135,8 +135,11 @@ router.get('/:goalId/edit', async (req,res) =>{
     }
 })
 
+//GET // /:goalId/photo - shows photo.ejs view
 router.get('/:goalId/photo', async (req, res) => {
-    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}`
+    console.log(req.query.photoSearch)
+    let search = req.query
+    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.query.photoSearch}`
     const response = await axios.get(img_url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}
     })
@@ -149,29 +152,35 @@ router.get('/:goalId/photo', async (req, res) => {
     })
 })
 
-//POST //:goalId/ posts a photo to goalId page
-router.post('/:goalId', async (req, res) => {
+//POST //:goalId/photo - for search results
+router.post('/:goalId/photo', async (req, res) => {
     try {
-        res.send(req.body.photoSearch)
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
+        console.log(req.body)
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
-        })
+            })
         await goal.update(
         {img_url: req.body.images},
-        {
-        where: {id: req.params.goalId}
-        })
-        // res.redirect(`/${goal.id}`)
+        {where: {id: req.params.goalId}}
+        )
+        res.redirect(`/goals/${goal.id}`)
     } catch (err) {
         console.log(err)
         res.send(err)
     }
 })
 
+//PUT//:goalId/photo?query= posts a photo to goalId page
+// router.put('/', (req, res) =>{
+// let goal = await db.goal.findOne({
+//     where: { id: req.params.goalId }
+// })
+// await db.goal.update(
+// {img_url: req.body.images},
+// {
+// where: {id: req.params.goalId}
+// })
+// })
 //  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
 router.put('/:goalId', async (req,res) => {
     try{
