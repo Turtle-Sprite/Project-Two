@@ -18,3 +18,46 @@
     </div>
   </form>
 </div>
+
+
+
+<script>
+
+  //FETCH to my server for info from backend, which will prevent page from refreshing
+  console.log('script is running')
+  const searchPhoto = document.querySelector('.photoSearch')
+  const searchInput = document.querySelector('#searchInput')
+  const imageResults = document.querySelector('.imgResults')
+  const photoSelect = document.querySelector('.photoSelect')
+
+  searchPhoto.addEventListener('click', async function () {
+      const response = await fetch(`/api/${searchInput.value}`)
+      const data = await response.json()
+      // console.log(imageResults)
+      let htmlString = ""
+      data.forEach(photo=> { 
+          htmlString += `<label class=\"m-1\">
+              <input type=\"radio\" id=\"${photo.id}" name=\"images\" value=\"${photo.urls.regular}\" class=\"hideRadio\">
+              <img src=\"${photo.urls.regular}&fm=jpg&w=200&fit=max&h=150\"
+                  id=\"${photo.id} \" class=\"images img-thumbnail\" alt=\"${photo.alt_description}\">
+          </label>`
+          })
+          console.log(htmlString)
+          imageResults.innerHTML = htmlString
+          // console.log(htmlString)
+  })
+
+  photoSelect.addEventListener('click', async function () {
+      console.log('I\'m clicked')
+      //grab elements, get data.id to identify photo id
+      const searchInput = document.querySelector('#searchInput')
+      const response = await fetch(`/api/${searchInput.value}`)
+      const data = await response.json()
+      // console.log(data)
+      //grab the radio elements
+      const checkedImage = document.querySelectorAll('img')
+      console.log(checkedImage)
+      // if()
+  })
+
+</script>

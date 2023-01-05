@@ -1,55 +1,19 @@
 <%- include('../partials/header.ejs', {user}) %>
 <!-- This page is linked by the href in the a tag surrounding the update button on the goal show page -->
-<h1>Update <%= goal.name %></h1>
+<div class="card mb-3 ">
+    <img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
+    <div class="card-img-overlay">
+      <a href="/goals/<%= goal.id %>/photo "><button class="btn btn-sm btn-light border">Update Photo</button></a>
+    </div>
+    <div class="card-body">
+        <h2>Update <%= goal.name %></h2>
+    </div>
+  </div>
 
-
-<div class="container accordHead">
-    <div class="row justify-content-center my-3">
-        <!-- Beginning first accordion -->
-        <div class="accordion" id="goalInfo">
-            <div class="accordion-item accordHead">
-                <h2 class="accordion-header accordHead" id="headingOne">
-                    <button class="accordion-button accordHeadButton" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Add a Photo to Your Goal
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show accordHead"
-                    aria-labelledby="headingOne" data-bs-parent="goalInfo">
-                    <div class="accordion-body">
-                        <!-- photo selection -->
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-6">
-                                <p>Please select a photo header for your goal.</p>
-                                <input type="text" class="form-control shadow-sm" id="searchInput" name="photoSearch"
-                                    placeholder="Search 'workout'">
-                                <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
-                                <button type="submit" class="btn btn-primary my-3 photoSelect">Select Photo</button>
-                            </div>
-                        </div>
-                        <div class="container text-center bg-secondary bg-gradient imgResults">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End first accordion -->
-        
-        <!-- Beginning second accordion -->
-        <div class="accordion" id="goalInfo">
-            <div class="accordion-item accordHead">
-                <h2 class="accordion-header accordHead" id="goalPhoto">
-                    <button class="accordion-button collapsed accordHeadButton2" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                    aria-controls="collapseTwo">
-                    Update Goal's Information
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse accordHead" aria-labelledby="goalPhoto"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <!-- form goal update -->
+<div class="container mt-3 mb-3">
+    <div class="row d-flex justify-content-center mt-2">
+        <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
+            <div class="card-body card p-3">
                 <!-- PUT FORM for goal Data -->
                 <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                         
@@ -92,53 +56,8 @@
                     </div>
                     </div>
                 </form>
-                    </div>
-                </div>
             </div>
-        </div>
-            <!-- End second accordion -->
         </div>
     </div>
 </div>
-
-<script>
-
-    //FETCH to my server for info from backend, which will prevent page from refreshing
-    console.log('script is running')
-    const searchPhoto = document.querySelector('.photoSearch')
-    const searchInput = document.querySelector('#searchInput')
-    const imageResults = document.querySelector('.imgResults')
-    const photoSelect = document.querySelector('.photoSelect')
-
-    searchPhoto.addEventListener('click', async function () {
-        const response = await fetch(`/api/${searchInput.value}`)
-        const data = await response.json()
-        // console.log(imageResults)
-        let htmlString = ""
-        data.forEach(photo=> { 
-            htmlString += `<label class=\"m-1\">
-                <input type=\"radio\" id=\"${photo.id}" name=\"images\" value=\"${photo.urls.regular}\" class=\"hideRadio\">
-                <img src=\"${photo.urls.regular}&fm=jpg&w=200&fit=max&h=150\"
-                    id=\"${photo.id} \" class=\"images img-thumbnail\" alt=\"${photo.alt_description}\">
-            </label>`
-            })
-            console.log(htmlString)
-            imageResults.innerHTML = htmlString
-            // console.log(htmlString)
-    })
-
-    photoSelect.addEventListener('click', async function () {
-        console.log('I\'m clicked')
-        //grab elements, get data.id to identify photo id
-        const searchInput = document.querySelector('#searchInput')
-        const response = await fetch(`/api/${searchInput.value}`)
-        const data = await response.json()
-        // console.log(data)
-        //grab the radio elements
-        const checkedImage = document.querySelectorAll('img')
-        console.log(checkedImage)
-        // if()
-    })
-
-</script>
     <%- include('../partials/footer.ejs') %>
