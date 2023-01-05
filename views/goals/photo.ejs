@@ -1,28 +1,30 @@
 <%- include('../partials/header.ejs', {user}) %>
-
+<div class="container mt-3 mb-3">
 <div class="row d-flex justify-content-center mt-2">
-  <div class="col-md-7 border border-1 rounded projectInfoHeader p-2">
+  <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
       <div class="card-body card p-3">
+        <h1>Choose a Photo Header</h1>
         <p>Please select a photo header for your goal.</p>
         
         <form action="/goals/<%= goal.id %>/photo" method="GET">
-        <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
-        <button class="btn btn-primary my-3">Search</button>
-        </form>
-        <form method="POST" action="/goals/<%= goal.id %>/photo">
-          <button type="submit" class="btn btn-primary my-3">Select Photo</button>
-        
-        <div class="container text-center bg-secondary bg-gradient">
+          <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
+          <div class="d-flex flex-row justify-content-center">
+            <button class="btn btn-primary m-3">Search</button>
+          </form>
+          <form method="POST" action="/goals/<%= goal.id %>/photo">
+            <button type="submit" class="btn btn-primary m-3">Select Photo</button>
+        </div>
+
+        <div class="text-center border-2 bg-gradient">
           <% photo.forEach(photo => { %>
             <label class="m-1">
-              <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>">
-                  <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" class="images" alt="<%= photo.description %>" class="img-thumbnail">
+              <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>" class="hideRadio">
+                  <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" class="images img-thumbnail" alt="<%= photo.alt_description %>">
             </label>
           <% }) %>
         </form>
-        </div>
+      </div>
     </div>
   </div>
 </div>
-
 <%- include('../partials/footer.ejs') %>
