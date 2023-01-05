@@ -27,6 +27,7 @@
   </div>
   </div>
 
+  <% goal.forEach(goal =>{ %>
   <div class="col-md-6 border border-1 rounded projectInfoHeader">
     <ul class="list-group p-3 rounded">
       <li class="list-group-item"><h2><span class="fw-bold">Goal:</span> <%= goal.name %></h2></li>
@@ -51,6 +52,7 @@
     </li>
   </ul>   
 </div>
+<% }) %>
 </div>
   
 

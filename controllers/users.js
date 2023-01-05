@@ -18,16 +18,21 @@ router.get('/new', (req, res) => {
 })
 
 // GET / users/profile --showthe user their profile page
-router.get('/profile', (req, res) => {
+router.get('/profile', async (req, res) => {
     //if the user is not logged in  -- they are allowed here
     if(!res.locals.user) {
         res.redirect('/users/login?message=You must authenticate before you can view this resource!')
     } else {
-
-        //TODO update to get all goals associated with this user
-
+        //TODO FindAll all goals associated with this user
+        let user = res.locals.user
+        // console.log(user)
+        let allGoals = await db.goal.findAll({
+            where: {userId: user.id}   
+        })
+        // console.log(allGoals)  
         res.render('users/profile.ejs', {
-            user: res.locals.user
+            user: res.locals.user,
+            goal: allGoals
         })
     }
 })
@@ -75,7 +80,7 @@ router.get('/login', (req, res) => {
     })
 })
 
-//POST / users/login -- input data from form renderred @ GET /users/login
+//POST / users/login -- login page -input data from form renderred @ GET /users/login
 router.post('/login', async (req, res) => {
     try {
         // look up user based on email
@@ -121,7 +126,6 @@ router.get('/logout', (req, res) => {
     res.clearCookie('userId')
     res.redirect('/')
 })
-
 
 router.get('/photo', async (req, res) => {
     try {

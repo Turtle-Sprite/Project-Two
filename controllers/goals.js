@@ -56,7 +56,8 @@ router.post('/', async (req,res) =>{
             img_url: req.body.images,
             due_date: req.body.dueDate,
             complete: req.body.progress,
-            public: req.body.public
+            public: req.body.public,
+            userId: res.locals.user.id
             }
         })
         // console.log(newGoal)

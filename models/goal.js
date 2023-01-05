@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.goal.belongsTo(models.project)
+      models.goal.belongsTo(models.user)
       models.goal.hasMany(models.task)
     }
   }
