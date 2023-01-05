@@ -17,6 +17,21 @@ router.get('/new', (req, res) => {
     })
 })
 
+// GET / users/profile --showthe user their profile page
+router.get('/profile', (req, res) => {
+    //if the user is not logged in  -- they are allowed here
+    if(!res.locals.user) {
+        res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+    } else {
+
+        //TODO update to get all goals associated with this user
+
+        res.render('users/profile.ejs', {
+            user: res.locals.user
+        })
+    }
+})
+
 // POST /users -- creates a new user from the form @ /users/new
 router.post('/profile', async (req, res) => {
     try {
@@ -107,17 +122,6 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
-// GET / users/profile --showthe user their profile page
-router.get('/profile', (req, res) => {
-    //if the user is not logged in  -- they are allowed here
-    if(!res.locals.user) {
-        res.redirect('/users/login?message=You must authenticate before you can view this resource!')
-    } else {
-        res.render('users/profile.ejs', {
-            user: res.locals.user
-        })
-    }
-})
 
 router.get('/photo', async (req, res) => {
     try {

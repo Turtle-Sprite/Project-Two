@@ -4,9 +4,9 @@
     <h1 class="p-2">Sign up for an Account</h1>
 </div>
 
-<div class="container">
-    <div class="row justify-content-center my-3">
-        <div class="col-lg-6">
+<div class="row d-flex justify-content-center mt-2">
+    <div class="col-md-7 border border-1 rounded projectInfoHeader p-2">
+        <div class="card-body card p-3">
             <form action="/users/profile" method="POST">
                 <div class="col-auto m-2 shadow-sm"> 
                     <label for="fName" class="form-label"> First Name: </label>
@@ -31,8 +31,10 @@
                     <label for="bio" class="form-label">About Me</label>
                     <textarea type="text" class="form-control" id="bio" name="bio" placeholder="e.g. I like setting goals and accomplishing tasks"></textarea>
                 </div>
-
-                <button type="submit" class="btn btn-dark shadow-sm">Sign Up</button>
+                <div class="row my-3 justify-content-center">
+                    <button type="submit" class="btn btn-dark shadow-sm p-1" style="width: 40%;">Sign Up</button>
+                    <a href="/users/login"><p class="col my-1">Or login</p></a>
+                </div>
             </form>
         </div>
     </div>
