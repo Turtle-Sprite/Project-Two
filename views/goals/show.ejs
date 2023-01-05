@@ -1,9 +1,10 @@
 <%- include('../partials/header.ejs', {user}) %>
 
+<!-- Header Card with Img Cap -->
 <div class="card mb-3 ">
   <img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
   <div class="card-img-overlay">
-    <a href="<%= goal.id %> "><button class="btn btn-sm btn-light">Update Photo</button></a>
+    <a href="<%= goal.id %> "><button class="btn btn-sm btn-light border">Update Photo</button></a>
   </div>
   <div class="card-body">
       <h5 class="card-title">Goal: <%= goal.name %></h5>
@@ -11,18 +12,26 @@
   </div>
 </div>
 
+<!-- Goals/projects Dashboard -->
 <div class="row d-flex justify-content-center">
     <div class="col-md-4 border border-1 rounded projectInfoHeader">
       <ul class="list-group p-3 rounded">
         <li class="list-group-item"><h5><span class="fw-bold">Project Name:</span> associated with goal</h5></li>
         <li class="list-group-item"><h6><span class="fw-bold">Other Goals:</span> associated with this project</h6></li>
       </ul>
-        <div class="card-body card p-3">
-          <h5 class="card-title p-2">Goal's Progress</h5>
-          <div class="progress m-1">
-            <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-          </div>
-        </div>
+      <div class="card-body card p-3">
+        <h5 class="card-title p-2">Goal's Progress</h5>
+        <div class="progress m-1">
+          <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+      </div>
+    </div>
+      <div class="card-body card p-3">
+        <h5 class="card-title p-2">Tasks Due</h5>
+        <div class="row">
+        <span class="col badge bg-primary rounded-pill mx-2">5 Due Soon</span>
+        <span class="col badge bg-warning rounded-pill mx-2">5 Due Now</span>
+      </div>
+    </div>
     </div>
 
     <div class="col-md-6 border border-1 rounded projectInfoHeader">
@@ -50,17 +59,23 @@
     </ul>   
   </div>
 </div>
-    <div class="col-md-6 border border-1 projectInfoHeader">
-      <h3>All tasks</h3>
-    </div>
 
-    <div class="row justify-content-center ms-1">
-      <div class="col-md-12 border border-1 text-center">
-          <h2>Blog here</h2>
-      </div>
+<!-- All Tasks -->
+<div class="row d-flex justify-content-center mt-3 mb-5">
+  <div class="col-md-10">
+  <div class="list-group">
+      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+        All Tasks
+      </button>
+      <button type="button" class="list-group-item list-group-item-action">A second button item</button>
+      <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+      <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+      <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
     </div>
   </div>
 </div>
+
+
 
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">

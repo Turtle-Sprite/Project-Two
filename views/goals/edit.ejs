@@ -58,19 +58,18 @@
 
                             <label for="name" class="form-label">Goal name</label>
                             <input type="text" class="form-control shadow-sm" id="name" name="name"
-                                value="<%= goal.name %>">
-
+                                value="<%= goal.name %>" required>
                             <label for="description" class="form-label"></label>Describe Event</label>
                             <textarea type="text" class="form-control shadow-sm" id="description" name="description"
-                                cols="10" rows="5"><%= goal.description %></textarea>
+                                cols="10" rows="5" required><%= goal.description %></textarea>
 
                             <label for="dueDate" class="form-label">Due Date</label>
                             <input type="date" class="form-control shadow-sm" id="dueDate" name="dueDate"
-                                value="<%= goal.due_date %>">
+                                value="<%= goal.due_date %>" required>
 
                             <label for="progress">Update goal's progress:</label>
                             <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
-                                id="progress" name="progress">
+                                id="progress" name="progress" required>
                                 <option selected>Update Progress</option>
                                 <option value="Not-Started">Not Started</option>
                                 <option value="In-Progress">In Progress</option>
@@ -78,7 +77,7 @@
                             </select>
 
                             <div class="col-auto m-3">
-                                <label for="public" class="form-label">Public or Private?</label>
+                                <label for="public" class="form-label" required>Public or Private?</label>
                                 <div class="mx-2">
                                     <input type="radio" id="public" name="public" value="Public" class="mx-2"
                                         checked>

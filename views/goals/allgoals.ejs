@@ -7,9 +7,9 @@
 <div class="list-group m-3">
     <% goal.forEach(goal => { %>
         <a href="/goals/<%=goal.id %>" class="list-group-item list-group-item-action" aria-current="true">
-            <div class="d-flex w-30 justify-content-between">
+            <div class="d-flex w-30 justify-content-start">
             <h4 class="mb-1">Goal: <%= goal.name %></h4>
-            <span class="badge bg-primary rounded-pill">14</span>
+            <span class="badge bg-primary rounded-pill mx-2">14</span>
         </div>
             <p class="mb-1"> <span class="h5">Due Date:</span> <%= goal.due_date %></p>
             <p class="mb-1"> <span class="h5">Goal Progress: </span> <%= goal.complete %></p>
