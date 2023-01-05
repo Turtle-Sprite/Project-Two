@@ -24,8 +24,8 @@
                                 <input type="text" class="form-control shadow-sm" id="searchInput" name="photoSearch"
                                     placeholder="Search 'workout'">
                                 <button class="btn btn-primary my-3 photoSearch" name="search">Search</button>
-                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                                 <button type="submit" class="btn btn-primary my-3 photoSelect">Select Photo</button>
+                <form method="POST" action="/goals/<%= goal.id %>?_method=PUT">
                             </div>
                         </div>
                         <div class="container text-center bg-secondary bg-gradient imgResults">
@@ -123,7 +123,7 @@
                     id=\"${photo.id} \" class=\"images img-thumbnail\" alt=\"${photo.alt_description}\">
             </label>`
             })
-            // console.log(htmlString)
+            console.log(htmlString)
             imageResults.innerHTML = htmlString
             // console.log(htmlString)
     })
@@ -136,7 +136,7 @@
         const data = await response.json()
         // console.log(data)
         //grab the radio elements
-        const checkedImage = document.querySelector('.images')
+        const checkedImage = document.querySelectorAll('img')
         console.log(checkedImage)
         // if()
     })

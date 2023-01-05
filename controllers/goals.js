@@ -76,7 +76,7 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.query.search}>`
         const response = await axios.get(img_url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
@@ -134,10 +134,25 @@ router.get('/:goalId/edit', async (req,res) =>{
     }
 })
 
+router.get('/:goalId/photo', async (req, res) => {
+    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}`
+    const response = await axios.get(img_url, {
+        headers: {"Accept-Encoding": "gzip,deflate,compress"}
+    })
+    let goal = await db.goal.findOne({
+        where: { id: req.params.goalId }
+    })
+    res.render('goals/photo', {
+        goal: goal,
+        photo: response.data.results
+    })
+})
+
 //POST //:goalId/ posts a photo to goalId page
 router.post('/:goalId', async (req, res) => {
     try {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
+        res.send(req.body.photoSearch)
+        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}`
         const response = await axios.get(img_url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
@@ -148,13 +163,8 @@ router.post('/:goalId', async (req, res) => {
         {img_url: req.body.images},
         {
         where: {id: req.params.goalId}
-        }
-        )
-        // res.send('hello')
-        res.render('goals/show.ejs', {
-            goal: goal,
-            photo: response.data.results
         })
+        // res.redirect(`/${goal.id}`)
     } catch (err) {
         console.log(err)
         res.send(err)

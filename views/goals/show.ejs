@@ -1,38 +1,56 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-
-<p>You are signed in as <%= user %></p>
-
-<div class="d-flex justify-content-center">
-  <div class="d-flex justify-content-center align-items-center headerPhoto">
-    <img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
+<div class="card mb-3 ">
+  <img src="<%= goal.img_url %>" class="goalheaderimg shadow-lg" alt="...">
+  <div class="card-img-overlay">
+    <a href="<%= goal.id %> "><button class="btn btn-sm btn-light">Update Photo</button></a>
+  </div>
+  <div class="card-body">
+      <h5 class="card-title">Goal: <%= goal.name %></h5>
+      <p class="card-text"><span class="fw-bold">Goal Description:</span> <%= goal.description %></p>
   </div>
 </div>
 
-<div class="container text-center">
-  <div class="row">
-    <div class="col-md-2 border border-1 projectInfoHeader">
-      <ul class="list-group">
-        <li class="list-group-item"><h5>Project Name: associated with goal</h5></li>
-        <li class="list-group-item"><h6>Other Goals: associated with this project</h6></li>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4 border border-1 rounded projectInfoHeader">
+      <ul class="list-group p-3 rounded">
+        <li class="list-group-item"><h5><span class="fw-bold">Project Name:</span> associated with goal</h5></li>
+        <li class="list-group-item"><h6><span class="fw-bold">Other Goals:</span> associated with this project</h6></li>
       </ul>
+        <div class="card-body card p-3">
+          <h5 class="card-title p-2">Goal's Progress</h5>
+          <div class="progress m-1">
+            <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          </div>
+        </div>
     </div>
-    <div class="col-md-4 border border-1">
-      <ul class="list-group">
-        <li class="list-group-item"><h2>Goal: <%= goal.name %></h2></li>
-        <li class="list-group-item"><p>Project Description: <%= goal.description %></p></li>
-        <li class="list-group-item"><p>Due Date: <%= goal.due_date %></p></li>
-        <li class="list-group-item"><p>Goal Progress: <%= goal.complete %></p></li>
-        <li class="list-group-item"><p>Who can see goal: <%= goal.public %></p></li>
-      </ul>
-      <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
-          <label for="delete"></label>
-          <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
+
+    <div class="col-md-6 border border-1 rounded projectInfoHeader">
+      <ul class="list-group p-3 rounded">
+        <li class="list-group-item"><h2><span class="fw-bold">Goal:</span> <%= goal.name %></h2></li>
+        <li class="list-group-item"><p><span class="fw-bold">Project Description:</span> <%= goal.description %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Due Date:</span>
+        </span> <%= goal.due_date %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Goal Progress:</span> <%= goal.complete %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Who can see goal:</span> <%= goal.public %></p></li>
+      
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+          <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
+            <label for="delete"></label>
+            <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
           </form>
-          
-          <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
-    </div>
-    <div class="col-md-6 border border-1">
+        </div>
+          <div class="col-6">
+            <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
+        </div>
+      </div>
+      </li>
+    </ul>   
+  </div>
+</div>
+    <div class="col-md-6 border border-1 projectInfoHeader">
       <h3>All tasks</h3>
     </div>
 
@@ -50,6 +68,7 @@
     <form method="POST" action="/goals/<%= goal.id %>">
           <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
           <button class="btn btn-primary my-3" name="search">Search</button>
+          <a href="/goals/<%= goal.id %>?search=dog" class="">Search</a>
     </div>
     </div>
     <div class="container text-center bg-secondary bg-gradient">

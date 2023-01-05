@@ -1,6 +1,6 @@
 
 body {
-  background: rgb(191, 195, 203);
+  background: #3da2c3;
 }
 .accordHead {
   background: rgb(215, 226, 239);
@@ -21,34 +21,37 @@ body {
     opacity: 0;
     width: 0;
     height: 0;
-  }
+}
   
-  /* IMAGE STYLES */
-  [type=radio] + img {
-    cursor: pointer;
-  }
-  
-  /* CHECKED STYLES */
-  [type=radio]:checked + img {
-    outline: 7px solid rgb(138, 180, 228);
-    border-radius: 10px;
-  }
-  .goalheaderimg {
-    width: 70%;
-    height: 200px;
-    border-radius: 30px;
-    background-color: aliceblue;
-    padding: 4px;
-    max-width: 600px;
-    max-height: 350px;
-  }
-  .headerPhoto {
-    background-color: #189AB4;
-    padding: 6px;
-    width: 100%;
-    border-top: #D4F1F4 2px solid;
-    border-bottom: #D4F1F4 2px solid;
-  }
-  .projectInfoHeader {
-    background-color: rgb(215, 226, 239);
-  }
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 7px solid rgb(138, 180, 228);
+  border-radius: 10px;
+}
+.goalheaderimg {
+  object-fit: cover;
+  width: 100%;
+  max-height: 300px;
+}
+.headerPhotoDiv {
+  background-color: #189AB4;
+  padding: 6px;
+  width: 100%;
+  border-top: #D4F1F4 2px solid;
+  border-bottom: #D4F1F4 2px solid;
+}
+.projectInfoHeader {
+  background-color: rgb(215, 226, 239);
+  margin: 5px;
+}
+input[type=checkbox] {
+  float: right;
+  height: 20px;
+  width: 20px;
+  border: 1px solid grey;
+}
