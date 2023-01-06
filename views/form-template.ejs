@@ -1,0 +1,21 @@
+<%- include('../partials/header.ejs', {user}) %>
+
+<div class="container mt-3 mb-3">
+    <div class="row d-flex justify-content-center mt-2">
+        <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
+            <div class="card-body card p-3">
+                <form method="POST" action="/goals" class="row gy-2 gx-3 align-items-center">
+                <fieldset class="shadow-sm">
+                    <legend>New Project</legend>
+                    <div class="col-auto m-2 shadow-sm">
+                        <label for="name" class="form-label">Project name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Crystal's Party Plan" required>
+                    </div>
+                </fieldset>
+                </form>
+            </div>      
+        </div>      
+    </div>      
+</div> 
+
+<%- include('../partials/footer.ejs') %>

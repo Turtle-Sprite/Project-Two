@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       due_date: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       userId: {
         type: Sequelize.INTEGER
@@ -29,6 +29,9 @@ module.exports = {
       },
       progress: {
         type: Sequelize.STRING
+      },
+      goalId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

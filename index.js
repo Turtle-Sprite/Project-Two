@@ -91,6 +91,7 @@ app.get('/api/:search', async (req, res) => {
 app.use("/users", require('./controllers/users'))
 app.use("/goals", require('./controllers/goals'))
 app.use("/tasks", require('./controllers/tasks'))
+app.use("/projects", require('./controllers/projects'))
 
 //new error messages?
 app.use(( err, req, res, next ) => {

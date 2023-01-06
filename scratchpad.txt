@@ -6,7 +6,7 @@ Associations:
 models.user.hasMany(models.project)
 
 ***Creating a project
-sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date,userId:integer,public:string,progress:string
+sequelize model:create --name project --attributes name:string,description:string,img_url:string,due_date:date,userId:integer,public:string,progress:string,goalId:integer
 
 Associations:
 models.project.belongsTo(models.user)
@@ -17,6 +17,7 @@ sequelize model:create --name goal --attributes name:string,description:string,i
 
 Associations:
 models.goal.belongsTo(models.project)
+models.goal.belongsTo(models.user)
 models.goal.hasMany(models.task)
 
 ***Creating a task
@@ -35,3 +36,5 @@ sequelize model:create --name task --attributes name:string,description:string,d
 ^will force a new update to models
 sequelize db:migrate
 Update associations
+
+May also need to ALTER projects ADD COLUMN "userId" integer in psql

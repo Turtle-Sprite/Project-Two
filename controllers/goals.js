@@ -24,16 +24,11 @@ router.get('/', async (req, res) =>{
 //GET // /new -- form with new goal - Check
 router.get('/new', async (req,res) =>{
     try {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
         let user = await res.locals.user
         if(user) {
             res.render('goals/new.ejs', {
                 user: user,
                 message: req.query.message ? req.query.message : null,
-                photo: response.data.results
             })
         } else {
             res.redirect('/users/login?message=You must authenticate before you can view this resource!')
