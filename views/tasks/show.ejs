@@ -1,12 +1,9 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-<div class="card mb-3 ">
-    <img src="https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzOTIwODh8MHwxfHNlYXJjaHw2fHxoaWtlJTNFfGVufDB8fHx8MTY3Mjc4NDkzNA&ixlib=rb-4.0.3&q=80&w=1080" class="card-img-top goalheaderimg" alt="...">
-    <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    </div>
-</div>
+<input placeholder="e.g. Find hiking boots" name="name" />
+<p id="values"></p>
+
+
 
 <div class="row d-flex justify-content-center">
 <!-- To DO List Input Card -->
@@ -33,12 +30,10 @@
 
     <div class="col-sm-5 mx-1">
     <div class="container">
-        <form id="form"">
             <div class="input-group">
-                <input id="input" type="text" class="form-control" placeholder="e.g. Find hiking boots" aria-label="to-do-item" aria-describedby="basic-addon">
-                <span><button id="btn" class="btn btn-primary" type="submit">Add Task</button></span>
+                <input id="input" type="text" placeholder="e.g. Find hiking boots">
+                <span><button id="btn-task" class="btn btn-primary" type="submit">Add Task</button></span>
             </div>
-        </form>
 
         <div id="list" class="list-group">
             <button id="0" type="button" class="list-group-item list-group-item-action">
@@ -86,24 +81,44 @@
 
 
 <script>
+
+const input = document.querySelector('input');
+const log = document.getElementById('values');
+let btn = document.getElementById('btn-task')
+let list = document.getElementById('list')
+let id = 1
+
+btn.addEventListener('click', function addTodoItem () {
+    if(input.value === "") {
+        console.log('update user error message to say, input a value please')
+    } else {
+        let item = `<button id="${id}" type="button" class="list-group-item list-group-item-action"> ${input.value}
+        <input id="${id}" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"></button>`
+        list.insertAdjacentHTML('beforeend', item)
+        id ++
+    }
+})
+
+
+// btn.addEventListener('click', updateInnerText);
+// // input.addEventListener('input', updateValue);
+
+// function updateInnerText() {
+//     log.innertext = "Hello catt"
+// }
+
+// function updateValue(e) {
+//   log.textContent = e.target.value;
+// }
     //variables
-    let form = document.getElementById('form')
-    let input = document.getElementById('input')
-    let btn =document.getElementById('btn')
-    let list = document.getElementById('list')
-    let id = 1
+    // let form = document.getElementById('form')
+    // let input = document.querySelector('input')
+    // console.log(input.value)
+    // let btn = document.getElementById('btn-task')
+    
 
     //button event listener
-    btn.addEventListener('click', function addTodoItem () {
-        if(input.value === "") {
-            console.log('update user error message to say, input a value please')
-        } else {
-            let item = `<button id="${id}" type="button" class="list-group-item list-group-item-action"> ${input.value}
-            <input id="${id}" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"></button>`
-            list.insertAdjacentHTML('beforeend', item)
-            id ++
-        }
-    })
+
 
 </script>
 

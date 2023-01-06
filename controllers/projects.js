@@ -33,8 +33,28 @@ router.get('/new', async (req, res)=> {
 })
 
 //GET / /:projectId - show page for a specific project
-router.get('/:projectId', (req, res)=> {
-    
+router.get('/:projectId', async (req, res)=> {
+    try {
+        let user = await res.locals.user
+        let project = await db.project.findOne({
+            where: {id: req.params.projectId}
+        },
+        {include: [db.goal]})
+
+        console.log(project.goal)
+        console.log(user.email)
+        if(user) {
+            res.render(`projects/show`, {
+                user: user,
+                project: project,
+                message: req.query.message ? req.query.message : null,
+            })
+        } else {
+            res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+        }
+    } catch(err) {
+        console.log('/get/new form', err)
+    }
 })
 
 //POST /:projectId
@@ -52,7 +72,7 @@ router.post('/', async (req, res)=> {
             complete: "Not-started",
             public: req.body.public,
             userId: res.locals.user.id
-            }
+            }, 
         })
         // console.log(newGoal)
         //if goal exists, redirect to goals page
@@ -64,6 +84,40 @@ router.post('/', async (req, res)=> {
         }
     } catch (err) {
         console.log('this is a project POST error', err)
+    }
+})
+
+//GET /:projectId/photo
+router.get('/:projectId/photo', async (req, res) =>{
+    let search = req.query.photoSearch
+    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.query.photoSearch}`
+    const response = await axios.get(img_url, {
+        headers: {"Accept-Encoding": "gzip,deflate,compress"}
+    })
+    let project = await db.project.findOne({
+        where: { id: req.params.projectId }
+    })
+    res.render('projects/photo', {
+        project: project,
+        photo: response.data.results
+    })
+})
+
+//POST /:projectId/photo
+router.post('/:projectId/photo', async (req, res) =>{
+    try {
+        console.log(req.body)
+        let project = await db.project.findOne({
+            where: { id: req.params.projectId }
+            })
+        await project.update(
+        {img_url: req.body.images},
+        {where: {id: req.params.projectId}}
+        )
+        res.redirect(`/projects/${project.id}`)
+    } catch (err) {
+        console.log(err)
+        res.send(err)
     }
 })
 

@@ -52,7 +52,8 @@ router.post('/', async (req,res) =>{
             due_date: req.body.dueDate,
             complete: req.body.progress,
             public: req.body.public,
-            userId: res.locals.user.id
+            userId: res.locals.user.id,
+            projectId: 1
             }
         })
         // console.log(newGoal)
@@ -133,7 +134,7 @@ router.get('/:goalId/edit', async (req,res) =>{
 //GET // /:goalId/photo - shows photo.ejs view
 router.get('/:goalId/photo', async (req, res) => {
     console.log(req.query.photoSearch)
-    let search = req.query
+    let search = req.query.photoSearch
     const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.query.photoSearch}`
     const response = await axios.get(img_url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}
@@ -150,7 +151,6 @@ router.get('/:goalId/photo', async (req, res) => {
 //POST //:goalId/photo - for search results
 router.post('/:goalId/photo', async (req, res) => {
     try {
-        console.log(req.body)
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
             })
