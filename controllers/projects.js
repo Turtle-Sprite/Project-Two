@@ -38,10 +38,11 @@ router.get('/:projectId', async (req, res)=> {
         let user = await res.locals.user
         let project = await db.project.findOne({
             where: {id: req.params.projectId}
-        },
-        {include: [db.goal]})
+        }
+        // {include: [db.goal]}
+        )
 
-        console.log(project.goal)
+        console.log(project)
         console.log(user.email)
         if(user) {
             res.render(`projects/show`, {

@@ -16,7 +16,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       due_date: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
+      },
+      goalId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

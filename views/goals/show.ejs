@@ -95,14 +95,72 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <!-- Start of to-do list -->
+      <form action="/tasks" method="POST">
+        <div class="col mx-1">
+          <div class="container">
+                  <div class="input-group mb-1">
+                      <input id="input" type="text" placeholder="e.g. Find hiking boots">
+                      <span><button id="btn-task" class="btn btn-primary" type="button">Add Task</button></span>
+                  </div>
+      
+              <div id="list" class="list-group">
+                <div class="row d-flex align-items-center">
+                    <div class="col-11">
+                    <input id="0" type="text" style="margin: 0; padding:0;" class="list-group-item-sm list-group-item-action" name="name" value="find boots" disabled>
+                    </div>
+                    <div class="col-1 align-self-start">
+                    <input class="form-check-input" style="margin: 0; padding:0;width:25px; height:25px" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
       </div>
+      <!-- submit button for task post form -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <input hidden type="text" name="goalId" value="<%= goal.id %>">
+        <!-- <input type="text" name="name" value="buy socks"> -->
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Save Changes</button>
+      </form>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 </div>
+
+
+<script>
+
+  const input = document.querySelector('input');
+  const log = document.getElementById('values');
+  let btn = document.getElementById('btn-task')
+  let list = document.getElementById('list')
+  let checkbox = document.getElementById('2')
+  let id = 1
+  
+btn.addEventListener('click', function addTodoItem () {
+    if(input.value === "") {
+        console.log('update user error message to say, input a value please')
+    } else {
+        let item = `<div class="row d-flex align-items-center">
+          <div class="col-11"><input id="${id}" type="text" class="list-group-item-md list-group-item-action" value="${input.value}" disabled>
+          </div>
+          <div class="col-1 align-self-start">
+          <input id="${id}" style="margin: 0; padding:0;width:25px; height:25px" class="form-check-input checkbox" type="checkbox" value="" aria-label="Checkbox">
+          </div>
+        </div>`
+        list.insertAdjacentHTML('beforeend', item)
+        id ++
+    }
+})
+
+// checkbox.forEach(checkbox => {
+//   checkbox.addEventListener('change', function () {
+//   console.log('hello')
+// })
+// })
+
+</script>
 <%- include('../partials/footer.ejs') %>

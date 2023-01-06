@@ -21,7 +21,7 @@ models.goal.belongsTo(models.user)
 models.goal.hasMany(models.task)
 
 ***Creating a task
-sequelize model:create --name task --attributes name:string,description:string,due_date:date
+sequelize model:create --name task --attributes name:string,description:string,due_date:date,goalId:integer
 
 Associations:
 models.task.belongsTo(models.goal)
@@ -37,4 +37,4 @@ sequelize model:create --name task --attributes name:string,description:string,d
 sequelize db:migrate
 Update associations
 
-May also need to ALTER projects ADD COLUMN "userId" integer in psql
+May also need to ALTER TABLE projects ADD COLUMN "userId" integer in psql
