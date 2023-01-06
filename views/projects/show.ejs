@@ -2,9 +2,9 @@
 
 <!-- Header Card with Img Cap -->
 <div class="card mb-3 ">
-    <img src="<%= project.img_url %>/photo" class="goalheaderimg shadow-lg" alt="...">
+    <img src="<%= project.img_url %>" class="goalheaderimg shadow-lg" alt="...">
     <div class="card-img-overlay">
-      <a href="/projects/<%= project.id %> "><button class="btn btn-sm btn-light border">Update Photo</button></a>
+      <a href="/projects/<%= project.id %>/photo"><button class="btn btn-sm btn-light border">Update Photo</button></a>
     </div>
     <div class="card-body">
         <h5 class="card-title">Project: <%= project.name %></h5>
