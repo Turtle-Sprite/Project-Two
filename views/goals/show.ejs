@@ -133,11 +133,11 @@
 
 <script>
 
-  const input = document.querySelector('input');
+  const input = document.querySelector("input[name='name']");
+  console.log(input.value)
   const log = document.getElementById('values');
   let btn = document.getElementById('btn-task')
   let list = document.getElementById('list')
-  let checkbox = document.getElementById('2')
   let id = 1
   
 btn.addEventListener('click', function addTodoItem () {
@@ -145,16 +145,22 @@ btn.addEventListener('click', function addTodoItem () {
         console.log('update user error message to say, input a value please')
     } else {
         let item = `<div class="row d-flex align-items-center">
-          <div class="col-11"><input id="${id}" type="text" class="list-group-item-md list-group-item-action" value="${input.value}" disabled>
+          <div class="col-11">
+            <input id="${id}" type="text" class="list-group-item-md list-group-item-action" name="name" value="${input.value}" disabled>
           </div>
           <div class="col-1 align-self-start">
-          <input id="${id}" style="margin: 0; padding:0;width:25px; height:25px" class="form-check-input checkbox" type="checkbox" value="" aria-label="Checkbox">
+            <input id="check${id}" style="margin: 0; padding:0;width:25px; height:25px" class="form-check-input checkbox" type="checkbox" value="" aria-label="Checkbox">
           </div>
         </div>`
         list.insertAdjacentHTML('beforeend', item)
         id ++
     }
 })
+// let checkbox = document.getElementById(`check3`)
+// console.log(checkbox)
+// checkbox.addEventListener('change', function () {
+//     console.log('hello')
+// })
 
 // checkbox.forEach(checkbox => {
 //   checkbox.addEventListener('change', function () {
