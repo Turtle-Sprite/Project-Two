@@ -8,7 +8,6 @@ const axios = require('axios')
 const db = require('../models')
 const { where } = require('sequelize')
 const { application } = require('express')
-
 const API_KEY = process.env.APIKEY
 
 
