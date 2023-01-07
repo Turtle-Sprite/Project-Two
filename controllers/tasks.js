@@ -38,5 +38,20 @@ router.delete('/', async (req, res) => {
     res.redirect(`/goals/${req.body.goalId}`)
 })
 
+//PUT / updates tasks where description = complete/incomplete
+router.put('/', async (req, res) => {
+    try{
+    //update the task to complete or incomplete
+    let taskUpdate = await db.task.update({
+        description: req.body.taskProgress
+    }, 
+    {where: {id: req.body.taskId} })
+    console.log(req.body.taskId)
+    res.redirect(`/goals/${req.body.goalId}`)
+    } catch (err) {
+        console.log("error on /tasks PUT route", err)
+    }
+})
+
 //export
 module.exports = router

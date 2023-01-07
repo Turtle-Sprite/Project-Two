@@ -81,17 +81,14 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
-        console.log(req.params.goalId)
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId },
             include: [db.task]
         })
-        console.log(goal)
         //make sure there is a goal with that id
         if(goal.id) {
              //make sure they're logged in
-             console.log('before render', goal.tasks)
             if(user) {
                 console.log(goal, 'line 94')
                 res.render('goals/show.ejs', {
