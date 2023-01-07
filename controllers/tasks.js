@@ -19,13 +19,10 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         //update tasks database
-        console.log('/goals/',req.body.goalId)
-    let [newTask, created] = await db.task.findOrCreate({
-        where: {name: req.body.todo},
-        defaults: {
-            goalId: req.body.goalId
-        }
-    })
+        // console.log('/goals/',req.body.goalId)
+    let newTask = await db.task.create(
+        {name: req.body.todo,
+        goalId: req.body.goalId})
     //redirect to :/goalId (goalId sent as hidden inputin goals/show POST form)
     res.redirect(`/goals/${req.body.goalId}`)
     } catch (err) {
@@ -34,12 +31,12 @@ router.post('/', async (req, res) => {
 })
 
 //DELETE //delete task from database, redirect to /:goalId
-router.delete('/', async (req, res) => {
-    console.log(req.body)
-    await db.task.destroy({ where: {id: req.body.taskId}})
-    //redirect to :/goalId (goalId sent as hidden inputin goals/show Delete form)
-    res.redirect(`/goals/${req.body.goalId}`)
-})
+// router.delete('/', async (req, res) => {
+//     console.log(req.body)
+//     await db.task.destroy({ where: {id: req.body.taskId}})
+//     //redirect to :/goalId (goalId sent as hidden inputin goals/show Delete form)
+//     res.redirect(`/goals/${req.body.goalId}`)
+// })
 
 //export
 module.exports = router

@@ -82,24 +82,22 @@ router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
         console.log(req.params.goalId)
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.query.search}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
         let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId },
             include: [db.task]
         })
+        console.log(goal)
         //make sure there is a goal with that id
         if(goal.id) {
              //make sure they're logged in
+             console.log('before render', goal.tasks)
             if(user) {
+                console.log(goal, 'line 94')
                 res.render('goals/show.ejs', {
                     user: user,
                     goal: goal,
-                    message: req.query.message ? req.query.message : null,
-                    photo: response.data.results
+                    message: req.query.message ? req.query.message : null
                 })
             } else {
                 res.redirect('/users/login?message=You must authenticate before you can view this resource!')
