@@ -62,112 +62,30 @@
 </div>
 
 <!-- All Tasks -->
-<div class="row d-flex justify-content-center mt-3 mb-5">
-  <div class="col-md-10">
-  <div class="list-group">
-      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-        All Tasks
+<div class="container mt-5" id="toDoContainer">
+  <form action="/tasks" method="POST" class="d-flex mx-2">
+      <input type="text" name=todo class="form-control" id="inputField" placeholder="Enter To-Do">
+      <input type="submit" value="Add To-Do" class="btn btn-primary">
+      <input hidden type="text" name="goalId" value="<%= goal.id %>">
+  </form>
+</div>
+
+<div class="container">
+  <form action="/tasks?_method=DELETE" method="POST">
+  <ul class="list-group mt-5 mb-4 d-flex">
+  <% goal.tasks.forEach(task => { %>
+      <li class="list-group-item" name="<% task.id%>"><%= task.name %>
+      <button type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+      </svg>
       </button>
-      <button type="button" class="list-group-item list-group-item-action">A second button item</button>
-      <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-      <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-      <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-      
-      <!-- Button trigger modal -->
-        <div class="list-group">
-          <div class="list-group-item text-center">
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Update Tasks
-            </button>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </li>
+      <% }) %>
+      <input hidden type="text" name="goalId" value="<%= goal.id %>">
+      <input hidden type="text" name="taskId" value="<%= task.id %>">
+  </ul>
+  </form>
 </div>
 
-<!-- Modal Update tasks -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Start of to-do list -->
-      <form action="/tasks" method="POST">
-        <div class="col mx-1">
-          <div class="container">
-                  <div class="input-group mb-1">
-                      <input id="input" type="text" placeholder="e.g. Find hiking boots">
-                      <span><button id="btn-task" class="btn btn-primary" type="button">Add Task</button></span>
-                  </div>
-      
-              <div id="list" class="list-group">
-                <div class="row d-flex align-items-center">
-                    <div class="col-11">
-                    <input id="0" type="text" style="margin: 0; padding:0;" class="list-group-item-sm list-group-item-action" name="name" value="find boots" disabled>
-                    </div>
-                    <div class="col-1 align-self-start">
-                    <input class="form-check-input" style="margin: 0; padding:0;width:25px; height:25px" type="checkbox" value="" aria-label="Checkbox for following text input">
-                  </div>
-                </div>
-              </div>
-          </div>
-          </div>
-      </div>
-      <!-- submit button for task post form -->
-      <div class="modal-footer">
-        <input hidden type="text" name="goalId" value="<%= goal.id %>">
-        <!-- <input type="text" name="name" value="buy socks"> -->
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Save Changes</button>
-      </form>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-<script>
-
-  const input = document.querySelector("input[name='name']");
-  console.log(input.value)
-  const log = document.getElementById('values');
-  let btn = document.getElementById('btn-task')
-  let list = document.getElementById('list')
-  let id = 1
-  
-btn.addEventListener('click', function addTodoItem () {
-    if(input.value === "") {
-        console.log('update user error message to say, input a value please')
-    } else {
-        let item = `<div class="row d-flex align-items-center">
-          <div class="col-11">
-            <input id="${id}" type="text" class="list-group-item-md list-group-item-action" name="name" value="${input.value}" disabled>
-          </div>
-          <div class="col-1 align-self-start">
-            <input id="check${id}" style="margin: 0; padding:0;width:25px; height:25px" class="form-check-input checkbox" type="checkbox" value="" aria-label="Checkbox">
-          </div>
-        </div>`
-        list.insertAdjacentHTML('beforeend', item)
-        id ++
-    }
-})
-// let checkbox = document.getElementById(`check3`)
-// console.log(checkbox)
-// checkbox.addEventListener('change', function () {
-//     console.log('hello')
-// })
-
-// checkbox.forEach(checkbox => {
-//   checkbox.addEventListener('change', function () {
-//   console.log('hello')
-// })
-// })
-
-</script>
 <%- include('../partials/footer.ejs') %>

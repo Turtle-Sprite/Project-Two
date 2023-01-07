@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
         //update tasks database
         console.log('/goals/',req.body.goalId)
     let [newTask, created] = await db.task.findOrCreate({
-        where: {name: req.body.name},
+        where: {name: req.body.todo},
         defaults: {
             goalId: req.body.goalId
         }
@@ -31,6 +31,14 @@ router.post('/', async (req, res) => {
     } catch (err) {
         console.log('tasks post error', err)
     }
+})
+
+//DELETE //delete task from database, redirect to /:goalId
+router.delete('/', async (req, res) => {
+    console.log(req.body)
+    await db.task.destroy({ where: {id: req.body.taskId}})
+    //redirect to :/goalId (goalId sent as hidden inputin goals/show Delete form)
+    res.redirect(`/goals/${req.body.goalId}`)
 })
 
 //export
