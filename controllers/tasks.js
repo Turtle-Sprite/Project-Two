@@ -31,12 +31,12 @@ router.post('/', async (req, res) => {
 })
 
 //DELETE //delete task from database, redirect to /:goalId
-// router.delete('/', async (req, res) => {
-//     console.log(req.body)
-//     await db.task.destroy({ where: {id: req.body.taskId}})
-//     //redirect to :/goalId (goalId sent as hidden inputin goals/show Delete form)
-//     res.redirect(`/goals/${req.body.goalId}`)
-// })
+router.delete('/', async (req, res) => {
+    console.log(req.body)
+    await db.task.destroy({ where: {id: req.body.taskId}})
+    //redirect to :/goalId (goalId sent as hidden inputin goals/show Delete form)
+    res.redirect(`/goals/${req.body.goalId}`)
+})
 
 //export
 module.exports = router
