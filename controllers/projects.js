@@ -37,13 +37,10 @@ router.get('/:projectId', async (req, res)=> {
     try {
         let user = await res.locals.user
         let project = await db.project.findOne({
-            where: {id: req.params.projectId}
-        }
-        // {include: [db.goal]}
-        )
-
-        console.log(project)
-        console.log(user.email)
+            where: {id: req.params.projectId},
+            include: [db.goal]
+        })
+        // console.log(project.goals[1].name)
         if(user) {
             res.render(`projects/show`, {
                 user: user,
@@ -61,7 +58,6 @@ router.get('/:projectId', async (req, res)=> {
 //POST /:projectId
 router.post('/', async (req, res)=> {
     try {
-        
         //find or create a project
         const [newProject, created] = await db.project.findOrCreate({
             where: {
@@ -99,6 +95,7 @@ router.get('/:projectId/photo', async (req, res) =>{
     let project = await db.project.findOne({
         where: { id: req.params.projectId }
     })
+    console.log(project)
     res.render('projects/photo', {
         project: project,
         photo: response.data.results

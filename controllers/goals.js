@@ -56,6 +56,13 @@ router.post('/', async (req,res) =>{
             projectId: 1
             }
         })
+        //Update goal association with project
+        const project = await db.project.update({
+            goalId: newGoal.id
+        },
+            {
+            where: { id: newGoal.projectId}
+        })
         // console.log(newGoal)
         //if goal exists, redirect to goals page
         if (!createdGoal) {
@@ -165,17 +172,6 @@ router.post('/:goalId/photo', async (req, res) => {
     }
 })
 
-//PUT//:goalId/photo?query= posts a photo to goalId page
-// router.put('/', (req, res) =>{
-// let goal = await db.goal.findOne({
-//     where: { id: req.params.goalId }
-// })
-// await db.goal.update(
-// {img_url: req.body.images},
-// {
-// where: {id: req.params.goalId}
-// })
-// })
 //  PUT // /:goalId updates a goal's progress - redirects to /:goalsId 
 router.put('/:goalId', async (req,res) => {
     try{
@@ -183,12 +179,9 @@ router.put('/:goalId', async (req,res) => {
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId }
         })
-        console.log(req.body.images)
         //make sure the goal exists
         if(goal.id) {
             //make sure they're logged in
-            // console.log('user info', user)
-            // console.log('this is the first console.log in the PUT method', req.body.progress)
            if(user) {
                 let goalUpdate = await db.goal.update({
                         name: req.body.name,
