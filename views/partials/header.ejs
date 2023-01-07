@@ -17,9 +17,13 @@
 <body>
     <!-- Navbar start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href='/users/profile'>Username</a>
-
+        <div class="container-fluid d-flex">
+          
+           <% if(user.name){ %>
+              <a class="navbar-brand" href='/users/profile'><%=user.name%></a>
+            <% } else { %>
+              <a class="navbar-brand" href='/users/new'>Homepage</a>
+            <% } %>
           <!-- Collapse to toggler with phone sized screens -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,12 +45,11 @@
                 Projects
                 </a>
                 <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Active projects</a></li>
-                <li><a class="dropdown-item" href="#">Archived Projects</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Active projects</a></li>
+                <li><a class="dropdown-item" href="#">Archived Projects</a></li> -->
                 <li><a class="dropdown-item" href="#">All Projects</a></li>
-                <li><a class="dropdown-item" href="#">Not-Started Projects</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Create New Project</a></li>
+                <li><a class="dropdown-item" href="/projects/new">Create New Project</a></li>
                 </ul>
             </li>
             <!-- end project -->
@@ -57,9 +60,9 @@
                   Goals
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/goals">Goals In-Progress</a></li>
+                  <!-- <li><a class="dropdown-item" href="/goals">Goals In-Progress</a></li>
                   <li><a class="dropdown-item" href="#">Goals Completed</a></li>
-                  <li><a class="dropdown-item" href="#">Goals Not Started</a></li>
+                  <li><a class="dropdown-item" href="#">Goals Not Started</a></li> -->
                   <li><a class="dropdown-item" href="/goals">All Goals</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="/goals/new">Create New Goal</a></li>
@@ -73,12 +76,12 @@
                   Tasks
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Tasks In-Progress</a></li>
+                  <!-- <li><a class="dropdown-item" href="#">Tasks In-Progress</a></li>
                   <li><a class="dropdown-item" href="#">Tasks Completed</a></li>
-                  <li><a class="dropdown-item" href="#">Tasks Not Started</a></li>
+                  <li><a class="dropdown-item" href="#">Tasks Not Started</a></li> -->
                   <li><a class="dropdown-item" href="#">All Tasks</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Create New Task</a></li>
+                  <!-- <li><hr class="dropdown-divider"></li> -->
+                  <!-- <li><a class="dropdown-item" href="#">Create New Task</a></li> -->
                 </ul>
               </li>
               <!-- end task -->

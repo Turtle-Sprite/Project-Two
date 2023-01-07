@@ -61,6 +61,7 @@ router.get('/:projectId', async (req, res)=> {
 //POST /:projectId
 router.post('/', async (req, res)=> {
     try {
+        
         //find or create a project
         const [newProject, created] = await db.project.findOrCreate({
             where: {

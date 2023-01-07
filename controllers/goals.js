@@ -50,7 +50,7 @@ router.post('/', async (req,res) =>{
             description: req.body.description,
             img_url: req.body.images,
             due_date: req.body.dueDate,
-            complete: req.body.progress,
+            complete: 'Not Started',
             public: req.body.public,
             userId: res.locals.user.id,
             projectId: 1
