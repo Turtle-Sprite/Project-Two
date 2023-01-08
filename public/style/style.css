@@ -65,7 +65,7 @@ input[type=checkbox] {
 
 .toDoListChecked {
   text-decoration: line-through;
-  background: limegreen;
+  background: slategray;
 }
 
 .disappear {

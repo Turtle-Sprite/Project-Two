@@ -32,6 +32,28 @@ router.get('/new', async (req, res)=> {
     }
 })
 
+//GET / /all- show page for a specific project
+router.get('/all', async (req, res)=> {
+    try {
+        let user = await res.locals.user
+        let project = await db.project.findAll({
+            include: [db.goal]
+        })
+        console.log(project)
+        if(user) {
+            res.render(`projects/allprojects`, {
+                user: user,
+                project: project,
+                message: req.query.message ? req.query.message : null,
+            })
+        } else {
+            res.redirect('/users/login?message=You must authenticate before you can view this resource!')
+        }
+    } catch(err) {
+        console.log('/get /all projects', err)
+    }
+})
+
 //GET / /:projectId - show page for a specific project
 router.get('/:projectId', async (req, res)=> {
     try {
@@ -40,7 +62,7 @@ router.get('/:projectId', async (req, res)=> {
             where: {id: req.params.projectId},
             include: [db.goal]
         })
-        // console.log(project.goals[1].name)
+        console.log(project.goals)
         if(user) {
             res.render(`projects/show`, {
                 user: user,
