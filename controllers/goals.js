@@ -81,7 +81,7 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
-        let user = await res.locals.user.email
+        let user = res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId },
             include: [db.task]
