@@ -17,16 +17,16 @@
 * Use `nodemon` to start your application
 * Go to http://localhost:8010/ in any browser to track your personal projects
 
-# API
+## API
 * Unsplash.com
 
-# ERD
+## ERD
 ![ERD](ERD.png)
 
-# Wireframe
+## Wireframe
 ![Wireframe](Wireframe.png)
 
-# User stories
+## User stories
 * As a user, I want to sign in to my account. 
 * I want to sign out of my account.
 * I want to view my profile which has a list of all of my goals and to-dos.

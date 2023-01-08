@@ -12,53 +12,74 @@
   </div>
 </div>
 
-<div class="container">
-<!-- Goals/projects Dashboard -->
-<div class="row d-flex justify-content-center">
-    <div class="col-md-4 border border-1 rounded projectInfoHeader">
-      <ul class="list-group rounded mt-2 mb-2">
-        <li class="list-group-item"><h5><span class="fw-bold">Project Name:</span> Project Name </h5></li>
-      </ul>
-      <div class="card-body card p-3">
-        <h5 class="card-title p-2">Goal's Progress</h5>
-        <div class="progress m-1">
-          <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <%=percentComplete %>%;" aria-valuenow="<%=percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete %>%</div>
-      </div>
-    </div>
-      <div class="card-body card p-3 mb-2">
-        <h5 class="card-title p-2">Tasks Due</h5>
-        <div class="row">
-        <span class="col badge bg-primary rounded-pill mx-2">5 Due Soon</span>
-        <span class="col badge bg-warning rounded-pill mx-2">5 Due Now</span>
-      </div>
-    </div>
-    </div>
-
-    <div class="col-md-6 border border-1 rounded projectInfoHeader">
-      <ul class="list-group p-3 rounded">
-        <li class="list-group-item"><h2><span class="fw-bold">Goal:</span> <%= goal.name %></h2></li>
-        <li class="list-group-item"><p><span class="fw-bold">Project Description:</span> <%= goal.description %></p></li>
-        <li class="list-group-item"><p><span class="fw-bold">Due Date:</span>
-        </span> <%= goal.due_date %></p></li>
-        <li class="list-group-item"><p><span class="fw-bold">Goal Progress:</span> <%= goal.complete %></p></li>
-        <li class="list-group-item"><p><span class="fw-bold">Who can see goal:</span> <%= goal.public %></p></li>
-      
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-6">
-          <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
-            <label for="delete"></label>
-            <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
-          </form>
+<!-- Goal Info Card -->
+<div class="d-flex justify-content-center flex-wrap">
+  <div class="col-md-6 p-2 rounded ">
+    <div class="card-body card p-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><h4><span class="fw-bold">Goal:</span> </th>
+        <th scope="col"><%= goal.name %></h4></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><p><span class="fw-bold">Goal Description:</span></th>
+        <td><%= goal.description %></p></td>
+      </tr>
+      <tr>
+        <th scope="row"><p><span class="fw-bold">Due Date:</span></th>
+        <td><%= goal.due_date %></p></td>
+      </tr>
+      <tr>
+        <th scope="row"><p><span class="fw-bold">Goal Progress:</span></th>
+        <td><%= goal.complete %></p></td>
+      </tr>
+      <tr>
+        <th scope="row"><p><span class="fw-bold">Who can see goal:</span></th>
+        <td> <%= goal.public %></p></td>
+      </tr>
+    </tbody>
+  </table>
+    <div class="row d-flex justify-content-center">
+      <div class="col mx-4">
+        <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
+          <label for="delete"></label>
+          <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
+        </form>
         </div>
-          <div class="col-6">
-            <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
-        </div>
+        <div class="col">
+        <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
       </div>
-      </li>
-    </ul>   
+    </div>
+    </div>
+  </div>
+  <div class="col-sm-5 rounded">
+    <ul class="list-group rounded m-2">
+      <li class="list-group-item"><h5><span class="fw-bold">Project Name:</span> Project Name </h5></li>
+    </ul>
+    <div class="card-body card p-3 m-2">
+      <h5 class="card-title p-2">Goal's Progress</h5>
+      <div class="progress m-1">
+        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <%=percentComplete %>%;" aria-valuenow="<%=percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete %>%</div>
+    </div>
+  </div>
+    <div class="card-body card p-3 m-2">
+      <h5 class="card-title p-2">Tasks Due</h5>
+      <div class="row">
+      <span class="col badge bg-primary rounded-pill mx-2">5 Due Soon</span>
+      <span class="col badge bg-warning rounded-pill mx-2">5 Due Now</span>
+    </div>
+  </div>
   </div>
 </div>
+
+
+<div class="container">
+<!-- Goals/projects Dashboard -->
+
+
 
 <!-- All Tasks -->
 <div class="container mt-5" id="toDoContainer">
@@ -117,7 +138,7 @@
    <% } %>
    <% }) %>
  <% } %> 
-
+</div>
 <script>
 let taskButton =document.getElementsByClassName('buttonTask')
 let taskList = document.getElementsByClassName('taskList')
