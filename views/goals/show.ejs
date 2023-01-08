@@ -7,8 +7,11 @@
     <a href="/goals/<%= goal.id %>/photo "><button class="btn btn-sm btn-light border">Update Photo</button></a>
   </div>
   <div class="card-body">
-      <h5 class="card-title">Goal: <%= goal.name %></h5>
-      <p class="card-text"><span class="fw-bold">Goal Description:</span> <%= goal.description %></p>
+    <h5 class="card-title">Goal: <%= goal.name %>
+    </h5>
+    <p class="card-text"><span class="fw-bold">Goal Description:</span>
+      <%= goal.description %>
+    </p>
   </div>
 </div>
 
@@ -16,139 +19,195 @@
 <div class="d-flex justify-content-center flex-wrap">
   <div class="col-md-6 p-2 rounded ">
     <div class="card-body card p-3">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col"><h4><span class="fw-bold">Goal:</span> </th>
-        <th scope="col"><%= goal.name %></h4></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row"><p><span class="fw-bold">Goal Description:</span></th>
-        <td><%= goal.description %></p></td>
-      </tr>
-      <tr>
-        <th scope="row"><p><span class="fw-bold">Due Date:</span></th>
-        <td><%= goal.due_date %></p></td>
-      </tr>
-      <tr>
-        <th scope="row"><p><span class="fw-bold">Goal Progress:</span></th>
-        <td><%= goal.complete %></p></td>
-      </tr>
-      <tr>
-        <th scope="row"><p><span class="fw-bold">Who can see goal:</span></th>
-        <td> <%= goal.public %></p></td>
-      </tr>
-    </tbody>
-  </table>
-    <div class="row d-flex justify-content-center">
-      <div class="col mx-4">
-        <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
-          <label for="delete"></label>
-          <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
-        </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">
+              <h4><span class="fw-bold">Goal:</span>
+            </th>
+            <th scope="col">
+              <%= goal.name %>
+                </h4>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <p><span class="fw-bold">Goal Description:</span>
+            </th>
+            <td>
+              <%= goal.description %>
+                </p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p><span class="fw-bold">Due Date:</span>
+            </th>
+            <td>
+              <%= goal.due_date %>
+                </p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p><span class="fw-bold">Goal Progress:</span>
+            </th>
+            <td>
+              <%= goal.complete %>
+                </p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p><span class="fw-bold">Who can see goal:</span>
+            </th>
+            <td>
+              <%= goal.public %>
+                </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row d-flex justify-content-center">
+        <div class="col mx-4">
+          <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
+            <label for="delete"></label>
+            <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
+          </form>
         </div>
         <div class="col">
-        <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
+          <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark" type="submit" id="update"
+              name="update">Update Goal</button></a>
+        </div>
       </div>
-    </div>
     </div>
   </div>
   <div class="col-sm-5 rounded">
     <ul class="list-group rounded m-2">
-      <li class="list-group-item"><h5><span class="fw-bold">Project Name:</span> Project Name </h5></li>
+      <li class="list-group-item">
+        <h5><span class="fw-bold">Project Name:</span><br>This goal is part of <a href="/projects/<%= project.id %>">
+            <%= project.name %>
+          </a> </h5>
+      </li>
     </ul>
     <div class="card-body card p-3 m-2">
       <h5 class="card-title p-2">Goal's Progress</h5>
       <div class="progress m-1">
-        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <%=percentComplete %>%;" aria-valuenow="<%=percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%=percentComplete %>%</div>
+        <div class="progress-bar" role="progressbar" aria-label="Example with label"
+          style="width: <%=percentComplete %>%;" aria-valuenow="<%=percentComplete %>" aria-valuemin="0"
+          aria-valuemax="100">
+          <%=percentComplete %>%
+        </div>
+      </div>
     </div>
-  </div>
     <div class="card-body card p-3 m-2">
       <h5 class="card-title p-2">Tasks Due</h5>
       <div class="row">
-      <span class="col badge bg-primary rounded-pill mx-2">5 Due Soon</span>
-      <span class="col badge bg-warning rounded-pill mx-2">5 Due Now</span>
-    </div>
-  </div>
-  </div>
-</div>
-
-<!-- All Tasks -->
-<div class="container mt-5" id="toDoContainer">
-  <form action="/tasks" method="POST" class="d-flex mx-2">
-      <input type="text" name=todo class="form-control" id="inputField" placeholder="Enter To-Do">
-      <input type="submit" value="Add To-Do" class="btn btn-primary">
-      <input hidden type="text" name="goalId" value="<%= goal.id %>">
-  </form>
-</div>
-
-<% if (goal.tasks.length > 0){ %> 
-  <% goal.tasks.forEach(task => { %>
-<div class="container d-flex flex-wrap mb-3">
-  <div class="row">
-    <div class="col m-0">
-      <li class="list-group-item taskList">
-        <form action="/tasks?_method=PUT" method="POST">
-          <div class="input-group-text">
-            <button type="submit" class="buttonTask" id="<%= task.id %>">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
-                <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
-              </svg>
-            </button>
-            <input hidden type="text" name="taskId" value="<%= task.id %>">
-            <input hidden type="text" name="taskProgress" value="complete">
-            <input hidden type="text" name="goalId" value="<%= goal.id %>">
-          </div>
-        </form>
-      </li>
-    </div>
-    <div class="col m-0">  
-      <form action="/tasks?_method=DELETE" method="POST">
-        <div class="input-group-text taskList">
-          <li class="list-group-item" name="<% task.id%>"><%= task.name %>
-          <input hidden type="text" name="taskId" value="<%= task.id %>">
-          <input hidden type="text" name="goalId" value="<%= goal.id %>">
-          <button type="submit" class="buttonTask">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-            </svg>
-          </button>
-        </div>
-        </li>
+        <span class="col badge bg-primary rounded-pill mx-2">5 Due Soon</span>
+        <span class="col badge bg-warning rounded-pill mx-2">5 Due Now</span>
       </div>
-    </form>
-    <% }) %>
-    <% } %> 
+    </div>
+  </div>
+
+
+  <!-- All Tasks -->
+  <div class="col-md-6 p-2 rounded">
+    <div class="card-body card p-3">
+      <h2>Tasks</h2>
+      <div class="container mt-3 mb-2" id="toDoContainer">
+        <form action="/tasks" method="POST" class="d-flex mx-2">
+          <input type="text" name=todo class="form-control" id="inputField" placeholder="Enter To-Do">
+          <input type="submit" value="Add To-Do" class="btn btn-primary">
+          <input hidden type="text" name="goalId" value="<%= goal.id %>">
+        </form>
+
+        <% if (goal.tasks.length){ %>
+          <% goal.tasks.forEach(task=> { %>
+            <% if(task.description != 'complete') { %> 
+            <tbody>
+              <table class="table">
+                <tr>
+                  <td scope="row m-0">
+                    <form action="/tasks?_method=PUT" method="POST">
+                      <button type="submit" class="buttonTask" id="<%= task.id %>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-app" viewBox="0 0 16 16">
+                          <path
+                            d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
+                        </svg>
+                      </button>
+                      <input hidden type="text" name="taskId" value="<%= task.id %>">
+                      <input hidden type="text" name="taskProgress" value="complete">
+                      <input hidden type="text" name="goalId" value="<%= goal.id %>">
+                    </form>
+                  </td>
+
+                  <td>
+                    <form action="/tasks?_method=DELETE" method="POST">
+                      <div class="input-group-text taskList">
+                        <li class="list-group-item" name="<% task.id%>">
+                          <%= task.name %>
+                        </li>
+                        <input hidden type="text" name="taskId" value="<%= task.id %>">
+                        <input hidden type="text" name="goalId" value="<%= goal.id %>">
+                  </td>
+                  <td class="float-end">
+                    <button type="submit" class="buttonTask">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                      </svg>
+                    </button>
+                    </div>
+                    </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <% } %> 
+      <% }) %>
+  </div>
+</div>
 </div>
 
-<% if (goal.tasks.length > 0){ %> 
-  <% goal.tasks.forEach(task => { %>
-    <% if(task.description == 'complete') { %>
-     <ul class="list-group taskComplete">
-       <li class="list-group-item disabled" aria-disabled="true"><%= task.name %></li>
-     </ul>
-   <% } %>
-   <% }) %>
- <% } %> 
+<div class="col-md-6 p-2 rounded ">
+  <div class="card-body card p-3">
+    <h2>Completed Tasks</h2>
+    <% if (goal.tasks.length> 0){ %>
+      <% goal.tasks.forEach(task=> { %>
+        <% if(task.description=='complete' ) { %>
+          <ul class="list-group taskComplete">
+            <li class="list-group-item disabled" aria-disabled="true">
+              <%= task.name %>
+            </li>
+          </ul>
+          <% } %>
+        <% }) %>
+      <% } %>
+    <% } %>
+  </div>
+</div>
+</div>
+</div>
 </div>
 <script>
-let taskButton =document.getElementsByClassName('buttonTask')
-let taskList = document.getElementsByClassName('taskList')
+  let taskButton = document.getElementsByClassName('buttonTask')
+  let taskList = document.getElementsByClassName('taskList')
 
-
-
-for( let i = 0; i < taskButton.length; i++) {
-  taskButton[i].addEventListener('click', function () {
-    console.log('clicked on',taskButton[i] )
-    console.log('class list ', taskList[i])
-    // for (let i = 0; i < taskList.length; i++) {
+  for (let i = 0; i < taskButton.length; i++) {
+    taskButton[i].addEventListener('click', function () {
+      console.log('clicked on', taskButton[i])
+      console.log('class list ', taskList[i])
+      // for (let i = 0; i < taskList.length; i++) {
       taskButton[i].classList.add('toDoListChecked')
       taskList[i].classList.add('toDoListChecked')
-    // }
-  })
-}
+      taskButton[i].classList.add('disappear')
+      // }
+    })
+  }
 
 
 
