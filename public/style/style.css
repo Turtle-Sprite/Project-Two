@@ -45,10 +45,7 @@ body {
   border-top: #D4F1F4 2px solid;
   border-bottom: #D4F1F4 2px solid;
 }
-.projectInfoHeader {
-  background-color: rgb(215, 226, 239);
-  margin: 5px;
-}
+
 input[type=checkbox] {
   float: right;
   height: 20px;

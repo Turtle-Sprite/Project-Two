@@ -72,11 +72,11 @@ app.use((req, res, next) => {
 
 //routes and controllers
 app.get('/', (req,res) => {
-    res.render('home.ejs', {
-        user: res.locals.user
-    })
-    //this will tell if user is signed in
-    // console.log(res.locals.user)
+    try{
+        res.render('home.ejs')
+    } catch (err) {
+        console.log('error on / home.ejs', err)
+    }
 })
 //Send the photos to this URL so we can grab them with a fetch request from our OWN site.
 app.get('/api/:search', async (req, res) => {

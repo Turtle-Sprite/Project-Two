@@ -6,27 +6,27 @@
 
 <div class="container mt-3 mb-3">
 <div class="row d-flex justify-content-center mt-2">
-    <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
-        <div class="card-body card p-3">
+    <div class="col-md-9 rounded p-2">
+        <div class="card-body card p-3 shadow-lg">
             <form method="POST" action="/goals" class="row gy-2 gx-3 align-items-center">
                 <fieldset class="shadow-sm">
                     <legend>New Goal</legend>
                 <div class="col-auto m-2 shadow-sm">
-                    <label for="name" class="form-label">Goal name</label>
+                    <label for="name" class="form-label fw-bold">Goal name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Crystal's Party Plan" required>
                 </div>
 
                 <div class="col-auto m-2 shadow-sm"> 
-                    <label for="description" class="form-label">Describe Event</label>
+                    <label for="description" class="form-label fw-bold">Describe Event</label>
                     <textarea type="text" class="form-control" id="description" name="description" placeholder="e.g. An event to celebrate the completion of project 2" required></textarea>
                 </div>
 
                 <div class="col-auto m-3">
-                    <label for="dueDate" class="form-label">Due Date</label>
+                    <label for="dueDate" class="form-label fw-bold">Due Date</label>
                     <input type="date" class="shadow-sm form-control"id="dueDate" name="dueDate" required>
                 </div>
                 <div class="col-auto m-3">
-                    <label for="public" class="form-label" required>Public or Private?</label>
+                    <label for="public" class="form-label fw-bold" required>Public or Private?</label>
                         <input type="radio" id="public" name="public" value="Public" checked>
                         <label for="Public">Public</label>
                         <input type="radio" id="private" name="public" value="Private">

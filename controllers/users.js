@@ -11,6 +11,13 @@ const API_KEY = process.env.APIKEY
 //routes
 
 //GET /users/new -- serves a form to create a new user
+router.get('/', (req, res) => {
+    res.render('home.ejs', {
+        user: res.locals.user
+    })
+})
+
+//GET /users/new -- serves a form to create a new user
 router.get('/new', (req, res) => {
     res.render('users/new.ejs', {
         user: res.locals.user

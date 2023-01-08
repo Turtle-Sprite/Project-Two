@@ -2,11 +2,11 @@
 
 <div class="container mt-3 mb-3">
 <div class="row d-flex justify-content-center mt-2">
-  <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
-      <div class="card-body card p-3">
+  <div class="col-md-9 rounded p-2">
+      <div class="card-body card p-3 shadow-lg">
         <h1>Choose a Photo Header</h1>
         <h3>Goal name: <%= goal.name %></h3>
-        <p>Please select a photo header for your goal.</p>
+        <p class="fw-bold">Please click a photo to select.</p>
         
         <form action="/goals/<%= goal.id %>/photo" method="GET">
           <input type="text" class="form-control shadow-sm" name="photoSearch" placeholder="Search 'workout'">
@@ -19,7 +19,7 @@
 
         <div class="text-center border-2 bg-gradient">
           <% photo.forEach(photo => { %>
-            <label class="m-1">
+            <label class="m-1 fw-bold">
               <input type="radio" id="<%= photo.id %>" name="images" value="<%= photo.urls.regular %>" class="hideRadio">
                   <img src="<%= photo.urls.regular %>&fm=jpg&w=200&fit=max&h=150" id="<%= photo.id %>>" class="images img-thumbnail" alt="<%= photo.alt_description %>">
             </label>

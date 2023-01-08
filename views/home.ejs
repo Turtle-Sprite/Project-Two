@@ -1,7 +1,7 @@
 <%- include('partials/header.ejs', {user}) %>
 
 <!-- Not loggedin -->
-<% if(!user) { %>
+<% if(user == "null") { %>
 <div class="container mt-3 mb-3">
     <div class="row d-flex justify-content-center mt-2">
         <div class="col-md-9 border border-1 rounded projectInfoHeader p-2">
@@ -15,12 +15,10 @@
                             <li>set goals</li>
                             <li>update tasks</li>
                         </ul>
-                        <p>It's everything you need to stay organized.
-                        </p>
+                        <p>It's everything you need to stay organized.</p>
                     </div>
                     <div class="col-md-4 m-2">
-                        <h5><a href="/users/new"><button class="btn btn-primary shadow-sm">Sign Up
-                                    Today</button></a></h5>
+                        <h5><a href="/users/new"><button class="btn btn-primary shadow-sm">Sign Up Today</button></a></h5>
                     </div>
                 </div>
             </div>
