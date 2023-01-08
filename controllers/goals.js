@@ -90,21 +90,27 @@ router.get('/:goalId', async (req,res) => {
         if(goal.id) {
              //make sure they're logged in
             if(user) {
-                console.log(goal.tasks.length, 'line 94')
-
                 //find the percent complete of tasks
                 let percentComplete = 0
                 if(goal.tasks.length > 0) {
                     let taskTotal = goal.tasks.length
+                    console.log(taskTotal, "total length")
                     let taskComplete = 0
-                    for(let i = 0; i > taskTotal; i++) {
-                        if(goal.task[i].description == 'complete') {
+                    for(let i = 0; i < taskTotal; i++) {
+                        console.log('fr loop running')
+                        if(goal.tasks[i].description == 'complete') {
                         taskComplete++
                     }
-                } 
-                percentComplete = taskTotal/taskComplete
                 }
-
+                console.log(taskComplete) 
+                if(taskComplete > 0 ) {
+                    percentComplete = Math.floor(taskComplete/taskTotal *100)
+                } else {
+                    percentComplete = 0
+                }
+                }
+                console.log(percentComplete)
+                console.log(goal.tasks.length, 'line 106')
                 res.render('goals/show.ejs', {
                     user: user,
                     goal: goal,
