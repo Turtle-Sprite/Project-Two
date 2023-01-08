@@ -78,30 +78,12 @@ app.get('/', (req,res) => {
         console.log('error on / home.ejs', err)
     }
 })
-//Send the photos to this URL so we can grab them with a fetch request from our OWN site.
-app.get('/api/:search', async (req, res) => {
-    const search = req.params.search
-    const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${search}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
-    res.json(response.data.results)
-})
 
 app.use("/users", require('./controllers/users'))
 app.use("/goals", require('./controllers/goals'))
 app.use("/tasks", require('./controllers/tasks'))
 app.use("/projects", require('./controllers/projects'))
 
-//new error messages?
-app.use(( err, req, res, next ) => {
-    res.locals.error = err;
-    if (err.status >= 100 && err.status < 600)
-      res.status(err.status);
-    else
-      res.status(500);
-    res.render('error');
-  });
 
 //listen on port
 app.listen(PORT, () => {

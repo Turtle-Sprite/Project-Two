@@ -7,106 +7,85 @@
     <title>Goal Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="/style/style.css">
-    <style>
-
-  .child{
-    background-color: aquamarine;
-  }
-  </style>
 </head>
 <body>
-    <!-- Navbar start -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid d-flex">
-          
-           <% if(user.name){ %>
-              <a class="navbar-brand" href='/users/profile'><%=user.name%></a>
-            <% } else { %>
-              <a class="navbar-brand" href='/'>Homepage</a>
-            <% } %>
-          <!-- Collapse to toggler with phone sized screens -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<!-- Navbar start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid d-flex">
+      
+      <!-- Collapse to toggler with phone sized screens -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <!-- NavBar Content -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                
-            <!-- start home -->
-            <li class="nav-item text-white">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <!-- End home -->
-
-            <!-- start project -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Projects
-                </a>
-                <ul class="dropdown-menu">
-                <!-- <li><a class="dropdown-item" href="#">Active projects</a></li>
-                <li><a class="dropdown-item" href="#">Archived Projects</a></li> -->
-                <li><a class="dropdown-item" href="#">All Projects</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/projects/new">Create New Project</a></li>
-                </ul>
-            </li>
-            <!-- end project -->
-
-            <!-- start goal -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Goals
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- <li><a class="dropdown-item" href="/goals">Goals In-Progress</a></li>
-                  <li><a class="dropdown-item" href="#">Goals Completed</a></li>
-                  <li><a class="dropdown-item" href="#">Goals Not Started</a></li> -->
-                  <li><a class="dropdown-item" href="/goals">All Goals</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/goals/new">Create New Goal</a></li>
-                </ul>
-            </li>
-              <!-- end goal -->
-
-              <!-- start task -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tasks
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- <li><a class="dropdown-item" href="#">Tasks In-Progress</a></li>
-                  <li><a class="dropdown-item" href="#">Tasks Completed</a></li>
-                  <li><a class="dropdown-item" href="#">Tasks Not Started</a></li> -->
-                  <li><a class="dropdown-item" href="#">All Tasks</a></li>
-                  <!-- <li><hr class="dropdown-divider"></li> -->
-                  <!-- <li><a class="dropdown-item" href="#">Create New Task</a></li> -->
-                </ul>
-              </li>
-              <!-- end task -->
-            </div> 
-        </ul>
-        <!-- if user is logged in, show logout button -->
-        <% if (user) { %>
-        <!-- start logout-->
-        <div class="d-flex justify-content-end">
-          <li class="nav-item text-white list-unstyled">
-            <a class="nav-link active" aria-current="page" href="/users/logout">Logout</a>
+      <!-- NavBar Content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+        <!-- start home -->
+        <li class="nav-item text-white">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        
-          <!-- End logout -->
+        <!-- End home -->
 
-          <!-- if user is logged out, show login button -->
-          <% } else { %> 
-            <li class="nav-item text-white list-unstyled">
-              <a class="nav-link active" aria-current="page" href="/users/login">Login</a>
+        <!-- start project -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Projects
+            </a>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">All Projects</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/projects/new">Create New Project</a></li>
+            </ul>
+        </li>
+        <!-- end project -->
+
+        <!-- start goal -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Goals
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/goals">All Goals</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/goals/new">Create New Goal</a></li>
+            </ul>
+        </li>
+          <!-- end goal -->
+
+          <!-- start task -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tasks
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">All Tasks</a></li>
+            </ul>
           </li>
-          <% } %> 
-        </div>
-          <!-- End of navbar content -->
-      </div>
+          <!-- end task -->
+        </div> 
+    </ul>
+    <!-- if user is logged in, show logout button -->
+    <% if (user) { %>
+    <!-- start logout-->
+    <div class="d-flex justify-content-end">
+      <li class="nav-item text-white list-unstyled">
+        <a class="nav-link active" aria-current="page" href="/users/logout">Logout</a>
+    </li>
+    
+      <!-- End logout -->
 
-      </nav>
-      <!-- navbar end -->
-        
+      <!-- if user is logged out, show login button -->
+      <% } else { %> 
+        <li class="nav-item text-white list-unstyled">
+          <a class="nav-link active" aria-current="page" href="/users/login">Login</a>
+      </li>
+      <% } %> 
+    </div>
+      <!-- End of navbar content -->
+  </div>
+
+  </nav>
+  <!-- navbar end -->
+    
