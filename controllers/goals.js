@@ -86,34 +86,33 @@ router.get('/:goalId', async (req,res) => {
             where: { id: req.params.goalId },
             include: [db.task]
         })
+        let project = await db.project.findOne({
+            where: {goalId: req.params.goalId}
+        })
         //make sure there is a goal with that id
         if(goal.id) {
              //make sure they're logged in
             if(user) {
-                //find the percent complete of tasks
+                //find the percent complete of tasks to send to page
                 let percentComplete = 0
                 if(goal.tasks.length > 0) {
                     let taskTotal = goal.tasks.length
-                    console.log(taskTotal, "total length")
                     let taskComplete = 0
                     for(let i = 0; i < taskTotal; i++) {
-                        console.log('fr loop running')
                         if(goal.tasks[i].description == 'complete') {
                         taskComplete++
                     }
                 }
-                console.log(taskComplete) 
-                if(taskComplete > 0 ) {
-                    percentComplete = Math.floor(taskComplete/taskTotal *100)
-                } else {
-                    percentComplete = 0
+                    if(taskComplete > 0 ) {
+                        percentComplete = Math.floor(taskComplete/taskTotal *100)
+                    } else {
+                        percentComplete = 0
+                    }
                 }
-                }
-                console.log(percentComplete)
-                console.log(goal.tasks.length, 'line 106')
                 res.render('goals/show.ejs', {
                     user: user,
                     goal: goal,
+                    project: project,
                     percentComplete: percentComplete,
                     message: req.query.message ? req.query.message : null
                 })

@@ -127,37 +127,5 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
-router.get('/photo', async (req, res) => {
-    try {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
-        res.render('users/photo.ejs', {photo: response.data.results})
-    } catch (err) {
-        console.log(err)
-        // res.status(500).send('server error')
-    }
-})
-
-//post /goals/photos shows a photo on the page
-router.post('/photo', async (req, res) => {
-    try {
-        const img_url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=1&query=${req.body.photoSearch}>`
-        const response = await axios.get(img_url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
-        console.log(response.data)
-        // res.send('hello')
-        res.render('users/photo.ejs', {
-            photo: response.data.results
-        })
-    } catch (err) {
-        console.log(err)
-        res.send(err)
-    }
-})
-
-
 //export
 module.exports = router
