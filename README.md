@@ -3,12 +3,12 @@
 # Description
 * Create an organizer for all your to-dos. Set due dates and login to your profile to update progress. 
 
-##Installation Instructions
+## Installation Instructions
 * Fork and clone this repository to your local directory
 * Navigate to the directory in your terminal and run ` npm i ` to install dependencies
 * Run `touch .env `and type in the following code in the .env file:
 ``` ENV_SECRET='secret' ```
-* Replace 'secret' with yor choice of 
+* Replace 'secret' with yor choice of string to hash your userIds
 * Go to https://unsplash.com/ to sign up for an account and get your API Key. 
 * Paste your API Key in the .env file. 
 * Setup your database (this app has four existing models: user, project, goal, task)
@@ -30,7 +30,6 @@
 * As a user, I want to sign in to my account. 
 * I want to sign out of my account.
 * I want to view my profile which has a list of all of my goals and to-dos.
-* I want reminders when the dates for my goals are approaching. 
 * I want to edit and delete my goals and to-dos.
 * I want to customize my goals and to dos with photos. 
 
