@@ -54,7 +54,7 @@ router.post('/', async (req,res) =>{
             complete: 'Not Started',
             public: req.body.public,
             userId: res.locals.user.id,
-            projectId: 1
+            projectId: req.body.addProject
             }
         })
         //Update goal association with project
@@ -81,7 +81,7 @@ router.post('/', async (req,res) =>{
 router.get('/:goalId', async (req,res) => {
     // console.log(res.locals.user)
     try {
-        let user = res.locals.user.email
+        let user = await res.locals.user.email
         let goal = await db.goal.findOne({
             where: { id: req.params.goalId },
             include: [db.task]
@@ -89,6 +89,7 @@ router.get('/:goalId', async (req,res) => {
         let project = await db.project.findOne({
             where: {goalId: req.params.goalId}
         })
+        console.log(project)
         //make sure there is a goal with that id
         if(goal.id) {
              //make sure they're logged in

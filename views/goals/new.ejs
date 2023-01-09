@@ -25,6 +25,18 @@
                     <label for="dueDate" class="form-label fw-bold">Due Date</label>
                     <input type="date" class="shadow-sm form-control"id="dueDate" name="dueDate" required>
                 </div>
+
+                <div class="col-auto m-2 shadow-sm"> 
+                <label for="projectAdd fw-bold">Which project is this goal a part of?:</label>
+                    <select class="form-select form-select-md mb-2" aria-label=".form-select-lg example"
+                        id="progress" name="projectAdd" required>
+                        <option selected>Select</option>
+                        <option value="5">Turtle Pond Takeover</option>
+                        <option value="1">Project 2</option>
+                        <option value="4">Cat Party</option>
+                    </select>
+                </div>
+
                 <div class="col-auto m-3">
                     <label for="public" class="form-label fw-bold" required>Public or Private?</label>
                         <input type="radio" id="public" name="public" value="Public" checked>
