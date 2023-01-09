@@ -54,9 +54,10 @@ router.post('/', async (req,res) =>{
             complete: 'Not Started',
             public: req.body.public,
             userId: res.locals.user.id,
-            projectId: req.body.addProject
+            projectId: req.body.projectAdd
             }
         })
+        console.log(newGoal)
         //Update goal association with project
         const project = await db.project.update({
             goalId: newGoal.id
@@ -200,6 +201,7 @@ router.put('/:goalId', async (req,res) => {
         //make sure the goal exists
         if(goal.id) {
             //make sure they're logged in
+            console.log(req.body)
            if(user) {
                 let goalUpdate = await db.goal.update({
                         name: req.body.name,
@@ -207,7 +209,8 @@ router.put('/:goalId', async (req,res) => {
                         due_date: req.body.dueDate,
                         img_url: req.body.images,
                         complete: req.body.progress,
-                        public: req.body.public
+                        public: req.body.public,
+                        projectId: req.body.projectAdd
                     },
                     {
                     where: {id: req.params.goalId }
