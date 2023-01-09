@@ -32,7 +32,7 @@ router.get('/new', async (req, res)=> {
     }
 })
 
-//GET / /all- show page for a specific project
+//GET / /all- show page for all projects
 router.get('/all', async (req, res)=> {
     try {
         let user = await res.locals.user
@@ -89,7 +89,7 @@ router.post('/', async (req, res)=> {
             description: req.body.description,
             img_url: "https://images.unsplash.com/photo-1597211165861-29ef11229300?crop=entropy&cs=tinysrgb&fit=max&fm=jpgixid=MnwzOTIwODh8MHwxfHNlYXJjaHwzfHx1bmRlZmluZWR8ZW58MHx8fHwxNjcyODg1MjA4&ixlib=rb-4.0.3&q=80&w=1080&fm=jpg&w=200&fit=max&h=150",
             due_date: req.body.dueDate,
-            complete: "Not-started",
+            progress: "Not-started",
             public: req.body.public,
             userId: res.locals.user.id
             }, 
