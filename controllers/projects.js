@@ -91,7 +91,7 @@ router.post('/', async (req, res)=> {
             due_date: req.body.dueDate,
             progress: "Not-started",
             public: req.body.public,
-            userId: res.locals.user.id
+            userId: parseInt(res.locals.user.id)
             }, 
         })
         // console.log(newGoal)

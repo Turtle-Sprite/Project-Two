@@ -53,8 +53,8 @@ router.post('/', async (req,res) =>{
             due_date: req.body.dueDate,
             complete: 'Not Started',
             public: req.body.public,
-            userId: res.locals.user.id,
-            projectId: req.body.projectAdd
+            userId: parseInt(res.locals.user.id),
+            projectId: parseInt(req.body.projectAdd)
             }
         })
         console.log(newGoal)
@@ -210,7 +210,7 @@ router.put('/:goalId', async (req,res) => {
                         img_url: req.body.images,
                         complete: req.body.progress,
                         public: req.body.public,
-                        projectId: req.body.projectAdd
+                        projectId: parseInt(req.body.projectAdd)
                     },
                     {
                     where: {id: req.params.goalId }
