@@ -41,9 +41,12 @@ https://ga-crystal-projectmanagement.herokuapp.com/
 | HTTP METHOD (_Verb_) | URL (_Nouns_)     | CRUD    | Response                             | Notes                                                                                                                    |
 | -------------------- | ----------------- | ------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | GET                  | `/`          | READ    | Welcome page with information about other projects if logged in |                                                                                       |
-| POST                  | `/users/new` | CREATE   | Sign up for account form              | requires email and password                                             |
-| GET                | `/users/login`          | READ |  Page requires email and password authetication from database      | redirect to where to find data (GET `/users/:user_id`) or just the new user data |
-| DELETE               | `/users/:userid` | DESTROY | No data                              | can send  redirect to homepage (GET `/`)                               |
+| GET                 | `/users/new` | READ | Sign up for account form              | requires email and password                                             |
+| POST                  | `/users/profile` | CREATE   | Sign up for account form              | requires email and password                                             |
+| GET                | `/users/login`          | READ |  Page requires email and password authetication from database      | redirect to where to find data or just the new user data |
+| POST               | `/users/login`          | CREATE |  Page requires email and password authetication from database      | redirect to where to find data or just the new user data |
+| GET                | `/users/profile`          | READ |  Displays goals from this user      | redirect to where to find data  or just the new user data |
+| GET                | `/users/logout`          | READ |  clears User cookies     | redirects to homepage (for user's not logged in) |
 
 
 ## GOALS
