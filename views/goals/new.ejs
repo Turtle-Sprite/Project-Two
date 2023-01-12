@@ -31,9 +31,9 @@
                     <select class="form-select form-select-md mb-2" aria-label=".form-select-lg example"
                         id="progress" name="projectAdd" required>
                         <option selected>Select</option>
-                        <option value="1">Turtle Pond Takeover</option>
-                        <option value="2">Project 2</option>
-                        <option value="4">Cat Party</option>
+                        <% project.forEach(project =>{ %>
+                        <option value="<%= project.id %>"><%= project.name %></option>
+                        <% }) %>
                     </select>
                 </div>
 

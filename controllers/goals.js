@@ -26,9 +26,14 @@ router.get('/', async (req, res) =>{
 router.get('/new', async (req,res) =>{
     try {
         let user = await res.locals.user
+        let project = await db.project.findAll({
+            where: {userId: res.locals.user.id}
+        })
+        // console.log(project)
         if(user) {
             res.render('goals/new.ejs', {
                 user: user,
+                project: project,
                 message: req.query.message ? req.query.message : null,
             })
         } else {

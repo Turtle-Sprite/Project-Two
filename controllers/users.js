@@ -34,12 +34,17 @@ router.get('/profile', async (req, res) => {
         let user = res.locals.user
         // console.log(user)
         let allGoals = await db.goal.findAll({
-            where: {userId: user.id}   
+            where: {userId: user.id}, 
+            order: [
+                ['due_date', 'ASC']
+            ]   
         })
+        let date = new Date()
         // console.log(allGoals)  
         res.render('users/profile.ejs', {
             user: res.locals.user,
-            goal: allGoals
+            goal: allGoals,
+            date: date
         })
     }
 })
