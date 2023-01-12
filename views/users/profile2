@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-5-md">
+    <div class="card-body card p-3">
+      <h2 class="card-title p-2"><% if ( user.name) { %>
+        Thanks for logging in to the app, <%= user.name %>)! </h2>
+      <% } else { %>
+        Thanks for logging in to the app, <%= user.email %>! </h2>
+      <% } %> 
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row d-flex justify-content-center"> -->
+  <div class="row">
+    <div class="col-4">
+      <div id="list-example" class="list-group">
+        <% goal.forEach(goal =>{ %>
+        <a class="list-group-item list-group-item-action" href="#list-item-<%= goal.id %>"><span class="fw-bold">Goal:</span> <%= goal.name %></h2></a>
+        <% }) %>
+      </div>
+    </div>
+    <div class="col-8" style="width: 500px; height: 400px; overflow: auto;">
+      <div data-bs-spy="scroll" data-bs-target="#list" data-bs-smooth-scroll="true" class="scrollspy" tabindex="0">
+        <% goal.forEach(goal =>{ %>
+        <h4 id="list-item-<%= goal.id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal.description %></p></h4>
+        <p><span class="fw-bold">Due Date:</span>
+        </span> <%= goal.due_date %></p></h4>
+        <p><span class="fw-bold">Goal Progress:</span> <%= goal.complete %></p>
+        <p><span class="fw-bold">Who can see goal:</span> <%= goal.public %></p>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+ 
+
+  <% goal.forEach(goal =>{ %>
+    <div class="col-md-4 rounded">
+      <ul class="list-group p-3 rounded">
+        <li class="list-group-item"><h2><span class="fw-bold">Goal:</span> <%= goal.name %></h2></li>
+        <li class="list-group-item"><p><span class="fw-bold">Goal Description:</span> <%= goal.description %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Due Date:</span>
+        </span> <%= goal.due_date %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Goal Progress:</span> <%= goal.complete %></p></li>
+        <li class="list-group-item"><p><span class="fw-bold">Who can see goal:</span> <%= goal.public %></p></li>
+      
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+          <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
+            <label for="delete"></label>
+            <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
+          </form>
+        </div>
+          <div class="col-6">
+            <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
+        </div>
+      </div>
+      </li>
+    </ul>   
+  </div>
+  <% }) %>
+</div>
+</div>

@@ -1,71 +1,64 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-<div class="row">
-  <div class="col-5-md">
-    <div class="card-body card p-3">
-      <h2 class="card-title p-2"><% if ( user.name) { %>
-        Thanks for logging in to the app, <%= user.name %>)! </h2>
-      <% } else { %>
-        Thanks for logging in to the app, <%= user.email %>! </h2>
-      <% } %> 
+<div class="tabs">
+  <div class="tab-header">
+    <div class="active">Goal Name</div>
+    <div>Goal Name</div>
+    <div>Goal Name</div>
+    <div>Goal Name</div>
+    <div>Goal Name</div>
+    <div>Goal Name</div>
+  </div>
+  <div class="tab-body">
+    <div class="active">
+      <h2>Goal Name</h2>
+      <p><span class="fw-bold">Goal Description:</span></p>
+      <p><span class="fw-bold">Due Date:</span></p>
+      <p><span class="fw-bold">Goal Progress:</span> </p>
+      <p><span class="fw-bold">Who can see goal:</span></p>
+    </div>
+    <div>
+      <h2>Goal Name</h2>
+      <p><span class="fw-bold">Goal Description:</span></p>
+      <p><span class="fw-bold">Due Date:</span></p>
+      <p><span class="fw-bold">Goal Progress:</span> </p>
+      <p><span class="fw-bold">Who can see goal:</span></p>
+    </div>
+    <div>
+      <h2>Goal Name</h2>
+      <p><span class="fw-bold">Goal Description:</span></p>
+      <p><span class="fw-bold">Due Date:</span></p>
+      <p><span class="fw-bold">Goal Progress:</span> </p>
+      <p><span class="fw-bold">Who can see goal:</span></p>
+    </div>
+    <div>
+      <h2>Goal Name</h2>
+      <p><span class="fw-bold">Goal Description:</span></p>
+      <p><span class="fw-bold">Due Date:</span></p>
+      <p><span class="fw-bold">Goal Progress:</span> </p>
+      <p><span class="fw-bold">Who can see goal:</span></p>
     </div>
   </div>
 </div>
 
-<div class="row d-flex justify-content-center">
-  <div id="carouselExample" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="..." class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="..." class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="..." class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+<script>
+  let tabs = document.querySelector(".tabs");
+  let tabHeader = tabs.querySelector('.tab-header');
+  let tabBody = tabs.querySelector('.tab-body');
+  let tabHeaders = tabs.querySelectorAll('.tab-header > div');
+  let tabBodyNodes = tabs.querySelectorAll('.tab-body > div');
 
+  for(let i=0; i < tabHeaders.length; i ++) {
+    tabHeaders[i].addEventListener('click', function() {
+      tabHeader.querySelector(".active").classList.remove('active');
+      tabHeaders[i].classList.add("active");
+      // tabBody.querySelector(".active").classList.remove('active');
+      // tabBodyNodes[i].classList.add("active");
+      tabBody.style.marginTop = `-${i*100}vh`;
+    })
+  }
 
+</script>
 
-
-
-  <% goal.forEach(goal =>{ %>
-  <div class="col-md-4 rounded">
-    <ul class="list-group p-3 rounded">
-      <li class="list-group-item"><h2><span class="fw-bold">Goal:</span> <%= goal.name %></h2></li>
-      <li class="list-group-item"><p><span class="fw-bold">Goal Description:</span> <%= goal.description %></p></li>
-      <li class="list-group-item"><p><span class="fw-bold">Due Date:</span>
-      </span> <%= goal.due_date %></p></li>
-      <li class="list-group-item"><p><span class="fw-bold">Goal Progress:</span> <%= goal.complete %></p></li>
-      <li class="list-group-item"><p><span class="fw-bold">Who can see goal:</span> <%= goal.public %></p></li>
-    
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-6">
-        <form method="POST" action="/goals/<%= goal.id %>?_method=DELETE">
-          <label for="delete"></label>
-          <button class="btn btn-dark" type="submit" id="delete" name="_method">Delete</button>
-        </form>
-      </div>
-        <div class="col-6">
-          <a href="/goals/<%= goal.id %>/edit"><button class="btn btn-dark"  type="submit" id="update" name="update">Update Goal</button></a>
-      </div>
-    </div>
-    </li>
-  </ul>   
-</div>
-<% }) %>
-</div>
-</div>
 
 <%- include('../partials/footer.ejs') %>
