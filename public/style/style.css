@@ -1,6 +1,6 @@
 
 body {
-  background: #4f4fff;
+  background: #5656e8;
 }
 /* HIDE RADIO */
 .hideRadio[type=radio] { 
@@ -102,6 +102,7 @@ input[type=checkbox] {
   background: #4f98ff;
   border-top: 1px solid rgb(40, 92, 248);
   height: calc(100% - 40px);
+  width: 300px;
   overflow: hidden;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.25);
   border-radius: 20px;
@@ -114,13 +115,13 @@ input[type=checkbox] {
   height: 10%;
   opacity: 0;
   top: -100%;
-  transform: translateX(-10px);
+  /* transform: translateX(-10px); */
 }
 
 .tabs .tab-body > div.active {
   opacity: 1;
   top: 30px;
-  transform: translateX(0px);
+  /* transform: translateX(0px); */
 }
 
 .tabs .tab-body div h2 {
