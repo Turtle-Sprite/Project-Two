@@ -16,6 +16,7 @@
 </div>
 
 <!-- Goal Info Card -->
+
 <div class="d-flex justify-content-center flex-wrap">
   <div class="col-md-6 p-2 rounded ">
     <div class="card-body card p-3">
@@ -89,7 +90,7 @@
   <div class="col-lg-6 rounded">
     <ul class="list-group rounded m-2">
       <li class="list-group-item">
-        <h5><span class="fw-bold">Project Name:</span><br>This goal is part of <a href="/projects/<%= project.id %>" <span style="color:rgb(180, 193, 97);"><%= project.name %></span></h5></a> </h5>
+        <h5><span class="fw-bold">Project Name:</span><br>This goal is part of <a href="/projects/<%= project.id %>" <span style="color:rgb(180, 193, 97);"><%= project.name %></span></a> </h5>
       </li>
     </ul>
 
@@ -112,14 +113,14 @@
       </div>
     </div>
   </div>
-
+</div>
 
   <!-- All Tasks -->
   <div class="col-md-6 p-2 rounded float-start">
     <div class="card-body card p-3">
       <h2>Tasks</h2>
       <div class="container mt-3 mb-2" id="toDoContainer">
-        <form action="/tasks" method="POST" class="d-flex mx-2">
+        <form action="/tasks" method="POST" class="d-flex ">
           <input type="text" name=todo class="form-control" id="inputField" placeholder="Enter To-Do">
           <input type="submit" value="Add To-Do" class="btn btn-primary">
           <input hidden type="text" name="goalId" value="<%= goal.id %>">
@@ -173,7 +174,7 @@
       <% }) %>
   </div>
 </div>
-</div>
+
 <div class="col-md-6 p-2 rounded ">
   <div class="card-body card p-3">
     <h2>Completed Tasks</h2>
@@ -191,14 +192,13 @@
     <% } %>
   </div>
 </div>
-</div>
-</div>
-</div>
+
+
 <script>
   let taskButton = document.getElementsByClassName('buttonTask')
   let taskList = document.getElementsByClassName('taskList')
-
   for (let i = 0; i < taskButton.length; i++) {
+    
     taskButton[i].addEventListener('click', function () {
       console.log('clicked on', taskButton[i])
       console.log('class list ', taskList[i])
@@ -209,9 +209,5 @@
       // }
     })
   }
-
-<script>
-
-  
 </script>
 <%- include('../partials/footer.ejs') %>

@@ -119,7 +119,7 @@ router.get('/:goalId', async (req,res) => {
                 res.render('goals/show.ejs', {
                     user: user,
                     goal: goal,
-                    project: project,
+                    project: project ? project : "No Project",
                     percentComplete: percentComplete,
                     message: req.query.message ? req.query.message : null
                 })
