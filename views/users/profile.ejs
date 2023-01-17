@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-5-md">
     <div class="card-body card p-3">
-      <h2 class="card-title p-2"><% if ( user.name) { %>
+      <h2 class="card-title p-1 m-1"><% if ( user.name) { %>
         Thanks for logging in to the app, <%= user.name %>)! </h2>
       <% } else { %>
         Thanks for logging in to the app, <%= user.email %>! </h2>
@@ -13,29 +13,98 @@
   </div>
 </div>
 
+
+<!-- Projects card -->
+<div class="profile-card card-body m-3">
+<h1>See your projects</h1>
+<% if(project.length > 5) { %> 
+  <% for(let i = 0; i < 4; i ++){ %>
+    <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= project[i].id %>" aria-expanded="false" aria-controls="<%= project[i].id %>">
+      <%= project[i].name %>
+    </button>
+  <% } %>
+  <a href="/projects"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+
+  <% for(let i =0; i < 4; i ++){ %>
+    <div class="collapse" id="<%= project[i].id %>">
+      <div class="card card-body">
+        <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project Description:</span> <%= project[i].description %></p></h4>
+        <p><span class="fw-bold">Due Date:</span>
+        </span> <%= project[i].due_date %></p></h4>
+        <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
+        <p><span class="fw-bold">Who can see project:</span> <%= project[i].public %></p>
+      </div>
+    </div>
+    <% } %>
+  <% } else {%>
+    <% for(let i = 0; i < project.length; i ++){ %>
+      <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= project[i].id %>" aria-expanded="false" aria-controls="<%= project[i].id %>">
+        <%= project[i].name %>
+      </button>
+    <% } %>
+    <a href="/projects"><button class="btn btn-primary p-1 m-1 button-profile">See All</button></a>
+  
+    <% for(let i =0; i < project.length; i ++){ %>
+      <div class="collapse" id="<%= project[i].id %>">
+        <div class="card card-body">
+          <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project Description:</span> <%= project[i].description %></p></h4>
+          <p><span class="fw-bold">Due Date:</span>
+          </span> <%= project[i].due_date %></p></h4>
+          <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
+          <p><span class="fw-bold">Who can see project:</span> <%= project[i].public %></p>
+        </div>
+      </div>
+      <% } %>
+  <% } %>
+</div>
+<!-- End Projects Card -->
+
+<!-- Goals card -->
+<div id="accordion">
+<div class="profile-card card-body m-3">
+  <h1>See your goals</h1>
 <% if(goal.length > 5) { %> 
   <% for(let i = 0; i < 4; i ++){ %>
-    <button class="btn btn-primary" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
+    <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
       <%= goal[i].name %>
-  </button>
+    </button>
   <% } %>
-  </div>
-</div>
-  <div class="row">
+  <a href="/goals"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+
+
     <% for(let i =0; i < 4; i ++){ %>
-    <div class="collapse" id="<%= goal[i].id %>">
+    <div class="collapse" id="<%= goal[i].id %>" data-parent="#accordion">
       <div class="card card-body">
         <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
         <p><span class="fw-bold">Due Date:</span>
         </span> <%= goal[i].due_date %></p></h4>
         <p><span class="fw-bold">Goal Progress:</span> <%= goal[i].complete %></p>
         <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
-        <% } %>
+      </div>
     </div>
-  </div>
+    <% } %>
+  <% } else { %>
+    <% for(let i = 0; i < goal.length; i ++){ %>
+      <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
+        <%= goal[i].name %>
+      </button>
+    <% } %>
+    <a href="/goals"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+  
+  
+      <% for(let i =0; i < goal.length; i ++){ %>
+      <div class="collapse" id="<%= goal[i].id %>" data-parent="#accordion">
+        <div class="card card-body">
+          <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
+          <p><span class="fw-bold">Due Date:</span>
+          </span> <%= goal[i].due_date %></p></h4>
+          <p><span class="fw-bold">Goal Progress:</span> <%= goal[i].complete %></p>
+          <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
+        </div>
+      </div>
+      <% } %>
   <% } %>
-  <a href="/goals"><button class="btn btn-primary">See All</button></a>
 </div>
-
+</div>
 
 <%- include('../partials/footer.ejs') %>

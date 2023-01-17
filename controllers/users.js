@@ -39,11 +39,15 @@ router.get('/profile', async (req, res) => {
                 ['due_date', 'ASC']
             ]   
         })
+        let allProjects = await db.project.findAll({
+            where: {userId: user.id}
+        })
         let date = new Date()
         // console.log(allGoals)  
         res.render('users/profile.ejs', {
             user: res.locals.user,
             goal: allGoals,
+            project: allProjects,
             date: date
         })
     }
