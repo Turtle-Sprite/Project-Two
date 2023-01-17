@@ -1,64 +1,41 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-<div class="tabs">
-  <div class="tab-header">
-    <div class="active">Goal Name</div>
-    <div>Goal Name</div>
-    <div>Goal Name</div>
-    <div>Goal Name</div>
-    <div>Goal Name</div>
-    <div>Goal Name</div>
-  </div>
-  <div class="tab-body">
-    <div class="active">
-      <h2>Goal Name</h2>
-      <p><span class="fw-bold">Goal Description:</span></p>
-      <p><span class="fw-bold">Due Date:</span></p>
-      <p><span class="fw-bold">Goal Progress:</span> </p>
-      <p><span class="fw-bold">Who can see goal:</span></p>
-    </div>
-    <div>
-      <h2>Goal Name</h2>
-      <p><span class="fw-bold">Goal Description:</span></p>
-      <p><span class="fw-bold">Due Date:</span></p>
-      <p><span class="fw-bold">Goal Progress:</span> </p>
-      <p><span class="fw-bold">Who can see goal:</span></p>
-    </div>
-    <div>
-      <h2>Goal Name</h2>
-      <p><span class="fw-bold">Goal Description:</span></p>
-      <p><span class="fw-bold">Due Date:</span></p>
-      <p><span class="fw-bold">Goal Progress:</span> </p>
-      <p><span class="fw-bold">Who can see goal:</span></p>
-    </div>
-    <div>
-      <h2>Goal Name</h2>
-      <p><span class="fw-bold">Goal Description:</span></p>
-      <p><span class="fw-bold">Due Date:</span></p>
-      <p><span class="fw-bold">Goal Progress:</span> </p>
-      <p><span class="fw-bold">Who can see goal:</span></p>
+
+<div class="row">
+  <div class="col-5-md">
+    <div class="card-body card p-3">
+      <h2 class="card-title p-2"><% if ( user.name) { %>
+        Thanks for logging in to the app, <%= user.name %>)! </h2>
+      <% } else { %>
+        Thanks for logging in to the app, <%= user.email %>! </h2>
+      <% } %> 
     </div>
   </div>
 </div>
 
-<script>
-  let tabs = document.querySelector(".tabs");
-  let tabHeader = tabs.querySelector('.tab-header');
-  let tabBody = tabs.querySelector('.tab-body');
-  let tabHeaders = tabs.querySelectorAll('.tab-header > div');
-  let tabBodyNodes = tabs.querySelectorAll('.tab-body > div');
-
-  for(let i=0; i < tabHeaders.length; i ++) {
-    tabHeaders[i].addEventListener('click', function() {
-      tabHeader.querySelector(".active").classList.remove('active');
-      tabHeaders[i].classList.add("active");
-      // tabBody.querySelector(".active").classList.remove('active');
-      // tabBodyNodes[i].classList.add("active");
-      tabBody.style.marginTop = `-${i*100}vh`;
-    })
-  }
-
-</script>
+<% if(goal.length > 5) { %> 
+  <% for(let i = 0; i < 4; i ++){ %>
+    <button class="btn btn-primary" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
+      <%= goal[i].name %>
+  </button>
+  <% } %>
+  </div>
+</div>
+  <div class="row">
+    <% for(let i =0; i < 4; i ++){ %>
+    <div class="collapse" id="<%= goal[i].id %>">
+      <div class="card card-body">
+        <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
+        <p><span class="fw-bold">Due Date:</span>
+        </span> <%= goal[i].due_date %></p></h4>
+        <p><span class="fw-bold">Goal Progress:</span> <%= goal[i].complete %></p>
+        <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
+        <% } %>
+    </div>
+  </div>
+  <% } %>
+  <a href="/goals"><button class="btn btn-primary">See All</button></a>
+</div>
 
 
 <%- include('../partials/footer.ejs') %>
