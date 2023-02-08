@@ -36,6 +36,13 @@
       </div>
     </div>
     <% } %>
+
+    <!-- This is checking if there are no projectss -->
+  <% } else if (project.length == 0) {%>
+    <h3>Better get planning! You have no projects. </h3>
+    <a href="/projects/new"><button class="btn btn-primary button-profile p-1 m-1">Create a Project</button></a>
+
+    <!-- if there are not more than 5 projects, display all -->
   <% } else {%>
     <% for(let i = 0; i < project.length; i ++){ %>
       <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= project[i].id %>" aria-expanded="false" aria-controls="<%= project[i].id %>">
@@ -83,6 +90,12 @@
       </div>
     </div>
     <% } %>
+
+  <!-- This is checking if there are no goals -->
+  <% } else if (project.length == 0) {%>
+    <h3>Better get planning! You have no goals. </h3>
+    <a href="/goals/new"><button class="btn btn-primary button-profile p-1 m-1">Create a Goal</button></a>
+
   <% } else { %>
     <% for(let i = 0; i < goal.length; i ++){ %>
       <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
