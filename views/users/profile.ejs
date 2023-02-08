@@ -49,6 +49,7 @@
 
     <!-- if there are not more than 5 projects, display all -->
   <% } else {%>
+    <div id="myGroup"> 
     <% for(let i = 0; i < project.length; i ++){ %>
       <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= project[i].id %>" aria-expanded="false" aria-controls="<%= project[i].id %>">
         <%= project[i].name %>
@@ -69,6 +70,7 @@
       </div>
       <% } %>
     </div>
+    </div>
   <% } %>
 </div>
 <!-- End Projects Card -->
@@ -77,7 +79,9 @@
 <div id="accordion">
 <div class="profile-card card-body m-3">
   <h1>See your goals</h1>
-<% if(goal.length > 5) { %> 
+
+  <% if(goal.length > 5) { %> 
+  <div id="myGroup2"> 
   <% for(let i = 0; i < 4; i ++){ %>
     <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
       <%= goal[i].name %>
@@ -87,7 +91,7 @@
 
   <div class="accordion-group">
     <% for(let i =0; i < 4; i ++){ %>
-    <div class="collapse" id="<%= goal[i].id %>" data-parent="#accordion">
+    <div class="collapse" id="<%= goal[i].id %>" data-bs-parent="#myGroup2">
       <div class="card card-body">
         <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
         <p><span class="fw-bold">Due Date:</span>
@@ -96,8 +100,9 @@
         <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
       </div>
       </div>
+      <% } %>
     </div>
-    <% } %>
+  </div>
 
   <!-- This is checking if there are no goals -->
   <% } else if (project.length == 0) {%>
@@ -105,6 +110,8 @@
     <a href="/goals/new"><button class="btn btn-primary button-profile p-1 m-1">Create a Goal</button></a>
 
   <% } else { %>
+
+    <div id="myGroup2"> 
     <% for(let i = 0; i < goal.length; i ++){ %>
       <button class="btn btn-primary p-1 m-1 button-profile" style="display:inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#<%= goal[i].id %>" aria-expanded="false" aria-controls="<%= goal[i].id %>">
         <%= goal[i].name %>
@@ -113,8 +120,9 @@
     <a href="/goals"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
   
   
+    <div class="accordion-group">
       <% for(let i =0; i < goal.length; i ++){ %>
-      <div class="collapse" id="<%= goal[i].id %>" data-parent="#accordion">
+      <div class="collapse" id="<%= goal[i].id %>" data-bs-parent="#myGroup2" >
         <div class="card card-body">
           <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
           <p><span class="fw-bold">Due Date:</span>
@@ -124,8 +132,9 @@
         </div>
       </div>
       <% } %>
+    </div>
+  </div>
   <% } %>
-</div>
 </div>
 
 <%- include('../partials/footer.ejs') %>
