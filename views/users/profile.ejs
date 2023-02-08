@@ -16,8 +16,9 @@
 
 <!-- Projects card -->
 <div class="profile-card card-body m-3">
-<h1>See your projects</h1>
+<h2 class="p-3">See your projects</h2>
 
+<div class="card p-3">
 <div id="myGroup"> 
 <% if(project.length > 5) { %> 
   <% for(let i = 0; i < 4; i ++){ %>
@@ -37,6 +38,9 @@
         </span> <%= project[i].due_date %></p></h4>
         <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
         <p><span class="fw-bold">Who can see project:</span> <%= project[i].public %></p>
+        <div class="">
+          <a href="/goals/<%= project[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See Details</button></a>
+        </div>
       </div>
     </div>
     <% } %>
@@ -68,6 +72,9 @@
           </span> <%= project[i].due_date %></p></h4>
           <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
           <p><span class="fw-bold">Who can see project:</span> <%= project[i].public %></p>
+          <div class="">
+            <a href="/goals/<%= project[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See Details</button></a>
+          </div>
         </div>
       </div>
       <% } %>
@@ -75,13 +82,12 @@
     </div>
   <% } %>
 </div>
+</div>
 <!-- End Projects Card -->
 
 <!-- Goals card -->
-<div id="accordion">
-<div class="profile-card card-body m-3">
-  <h1>See your goals</h1>
-
+  <h2 class="p-3">See your goals</h2>
+  <div class="card p-3">
   <% if(goal.length > 5) { %> 
   <div id="myGroup2"> 
   <% for(let i = 0; i < 4; i ++){ %>
@@ -142,14 +148,15 @@
           <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
         </div>
         <div class="">
-          <a href="/goals/<%= goal[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+          <a href="/goals/<%= goal[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See Details</button></a>
         </div>
         </div>
       </div>
       <% } %>
     </div>
-  </div>
+
   <% } %>
 </div>
+
 
 <%- include('../partials/footer.ejs') %>
