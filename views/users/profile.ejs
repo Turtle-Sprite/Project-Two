@@ -31,7 +31,8 @@
   <% for(let i =0; i < 4; i ++){ %>
     <div class="collapse" id="<%= project[i].id %>" data-bs-parent="#myGroup">
       <div class="card card-body">
-        <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project Description:</span> <%= project[i].description %></p></h4>
+        <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project name:</span> <%= project[i].name %></p></h4>
+        <h6 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project :</span> <%= project[i].description %></p></h6>
         <p><span class="fw-bold">Due Date:</span>
         </span> <%= project[i].due_date %></p></h4>
         <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
@@ -61,7 +62,8 @@
     <% for(let i =0; i < project.length; i ++){ %>
       <div class="collapse" data-bs-parent="#myGroup" id="<%= project[i].id %>">
         <div class="card card-body">
-          <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project Description:</span> <%= project[i].description %></p></h4>
+          <h4 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project name:</span> <%= project[i].name %></p></h4>
+          <h6 id="list-item-<%= project[i].id %>"><p><span class="fw-bold">Project :</span> <%= project[i].description %></p></h6>
           <p><span class="fw-bold">Due Date:</span>
           </span> <%= project[i].due_date %></p></h4>
           <p><span class="fw-bold">Project Progress:</span> <%= project[i].complete %></p>
@@ -94,14 +96,15 @@
     <div class="collapse" id="<%= goal[i].id %>" data-bs-parent="#myGroup2">
       <div class="card card-body d-flex">
         <div>
-        <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
+        <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Name:</span> <%= goal[i].name %></p></h4>
+        <h6 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h6>
         <p><span class="fw-bold">Due Date:</span>
         </span> <%= goal[i].due_date %></p></h4>
         <p><span class="fw-bold">Goal Progress:</span> <%= goal[i].complete %></p>
         <p><span class="fw-bold">Who can see goal:</span> <%= goal[i].public %></p>
       </div>
         <div class="">
-          <a href="/goals/<%= goal[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+          <a href="/goals/<%= goal[i].id%>"><button class="btn btn-primary button-profile p-1 m-1">See Details</button></a>
         </div>
       </div>
 
@@ -123,7 +126,7 @@
         <%= goal[i].name %>
       </button>
     <% } %>
-    <a href="/goals"><button class="btn btn-primary button-profile p-1 m-1">See All</button></a>
+    <a href="/goals"><button class="btn btn-primary button-profile p-1 m-1">See Details</button></a>
   
   
     <div class="accordion-group">
@@ -131,7 +134,8 @@
       <div class="collapse" id="<%= goal[i].id %>" data-bs-parent="#myGroup2" >
         <div class="card card-body d-flex">
           <div class="">
-          <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h4>
+          <h4 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Name:</span> <%= goal[i].name %></p></h4>
+          <h6 id="list-item-<%= goal[i].id %>"><p><span class="fw-bold">Goal Description:</span> <%= goal[i].description %></p></h6>
           <p><span class="fw-bold">Due Date:</span>
           </span> <%= goal[i].due_date %></p></h4>
           <p><span class="fw-bold">Goal Progress:</span> <%= goal[i].complete %></p>
