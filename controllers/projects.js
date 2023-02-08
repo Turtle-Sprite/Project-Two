@@ -21,7 +21,7 @@ router.get('/new', async (req, res)=> {
         let user = await res.locals.user
         if(user) {
             res.render('projects/new', {
-                user: user,
+                user: user ? user : 'Not signed in',
                 message: req.query.message ? req.query.message : null,
             })
         } else {

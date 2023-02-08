@@ -59,7 +59,7 @@ input[type=checkbox] {
   display: none;
 }
 
-.profile-card {
+/* .profile-card {
   display: inline-block;
   background-color: aliceblue;
   padding: 10px;
@@ -69,4 +69,4 @@ input[type=checkbox] {
 .button-profile{
   width: 150px;
   height: 60px;
-}
+} */

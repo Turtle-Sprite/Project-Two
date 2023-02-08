@@ -46,8 +46,8 @@ router.get('/profile', async (req, res) => {
         // console.log(allGoals)  
         res.render('users/profile.ejs', {
             user: res.locals.user,
-            goal: allGoals,
-            project: allProjects,
+            goal: allGoals ? allGoals : 'No goals, get working!',
+            project: allProjects ? allProjects : "No projects, get planning!",
             date: date
         })
     }
