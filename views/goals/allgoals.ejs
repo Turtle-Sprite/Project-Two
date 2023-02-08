@@ -1,30 +1,38 @@
 <%- include('../partials/header.ejs', {user}) %>
 
-<div class="m-3">
-    <h2 class="p-2">All Goals</h2>
-</div>
+    <div class="container">
+        <div class="m-3">
+            <h2 class="p-2">All Goals</h2>
+        </div>
 
-<div class="list-group m-3">
-    <table class="table table-dark table-hover">
-        <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Goal</th>
-              <th scope="col">Due Date:</th>
-              <th scope="col">Goal Progress:</th>
-            </tr>
-          </thead>
+        <div class="list-group m-3">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Goal</th>
+                        <th scope="col">Due Date:</th>
+                        <th scope="col">Goal Progress:</th>
+                    </tr>
+                </thead>
 
-    <% goal.forEach(goal => { %>
-              <tbody>
-                <tr>
-                  <th scope="row"></th>
-                  <td><%= goal.name %></td>
-                  <td><%= goal.due_date %></td>
-                  <td><%= goal.complete %></td>
-                </tr>
-              </tbody>
-              <% }) %>
+                <% goal.forEach(goal=> { %>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <td>
+                                <%= goal.name %>
+                            </td>
+                            <td>
+                                <%= goal.due_date %>
+                            </td>
+                            <td>
+                                <%= goal.complete %>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <% }) %>
             </table>
-</div>
-<%- include('../partials/footer.ejs') %>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
